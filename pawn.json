@@ -1,0 +1,34 @@
+{
+	"user": "revolutionmp",
+	"repo": "revolution",
+	"tag": "0.0.1",
+	"entry": "src/Main.pwn",
+	"output": "gamemodes/Main.amx",
+	"local": true,
+	"dependencies": [
+		"pawn-lang/samp-stdlib",
+		"Y-Less/sscanf:v2.13.8",
+		"pawn-lang/YSI-Includes@5.x",
+		"rizkyana-id/sampvoice:v3.1"
+	],
+	"runtimes": [
+		{
+			"name": "main",
+			"hostname": "Evolve Roleplay",
+			"version": "0.3.7",
+			"language": "Bahasa Indonesia",
+			"port": 7777,
+			"lanmode": true,
+			"maxplayers": 5,
+			"lagcompmode": 1,
+			"conncookies": false,
+			"cookielogging": false,
+			"chatlogging": false,
+			"extra": {
+				"crashdetect_log": "logs/crashdetect.log",
+				"sv_port": "8888"
+			},
+			"filterscripts": ["Voice"]
+		}
+	]
+}
