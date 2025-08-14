@@ -1,6 +1,6 @@
 # revolution
 
-[![sampctl](https://img.shields.io/badge/sampctl-evolve--testing-2f2f2f.svg?style=for-the-badge)](https://github.com/rizkyana-id/evolve-testing)
+[![sampctl](https://img.shields.io/badge/sampctl-revolution-2f2f2f.svg?style=for-the-badge)](https://github.com/rizkyana-id/evolve-testing)
 
 <!--
 Short description of your library, why it's useful, some examples, pictures or
@@ -31,13 +31,7 @@ Happy Pawning!
 Simply install to your project:
 
 ```bash
-sampctl package install rizkyana-id/evolve-testing
-```
-
-Include in your code and begin using the library:
-
-```pawn
-#include <evolve-testing>
+sampctl package install revolutionmp/revolution
 ```
 
 ## Usage
