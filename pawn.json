@@ -8,7 +8,15 @@
 	"dependencies": [
 		"pawn-lang/samp-stdlib",
 		"Y-Less/sscanf:v2.13.8",
+		"rizkyana-id/samp-plugin-crashdetect:v4.22",
+		"samp-incognito/samp-streamer-plugin:v2.9.6",
 		"pawn-lang/YSI-Includes@5.x",
+		"pBlueG/SA-MP-MySQL:R41-4",
+		"Sreyas-Sreelal/samp-bcrypt:0.4.1",
+		"Southclaws/pawn-chrono:1.1.1",
+		"katursis/Pawn.Regex:1.2.3",
+		"Nickk888SAMP/Dialog-Pages:3.3.0",
+		"rizkyana-id/easyDialog:",
 		"rizkyana-id/sampvoice:v3.1"
 	],
 	"runtimes": [
