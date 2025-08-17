@@ -1,2 +1,7 @@
+* text=auto
+*.sh eol=lf
+*.pwn eol=lf
+*.inc eol=lf
+Dockerfile eol=lf
 *.pwn linguist-language=Pawn
 *.inc linguist-language=Pawn
