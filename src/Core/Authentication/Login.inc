@@ -170,7 +170,7 @@ public LoadCharacter(playerid, idx, check)
     }
     else
     {
-        new bool:factionid;
+        new query[512], bool:factionid;
         SetPVarInt(playerid, "curtick", GetTickCount());
         cache_is_value_name_null(idx, "FactionID", factionid);
         CreateCharORM(playerid, factionid);
@@ -197,8 +197,12 @@ public LoadCharacter(playerid, idx, check)
         SetPlayerHealth(playerid, PlayerCharInfo[playerid][Health]);
         SetPlayerArmour(playerid, PlayerCharInfo[playerid][Armour]);
 
+        mysql_format(Database, query, sizeof(query), "SELECT `ID`, `CharacterID`, `ShareKeyID`, `Model`, `Plate`, `Insurance`, `Locked`, `Handbrake`, `Destroyed`, `Health`, `MaxHealth`, `Fuel`, `MaxFuel`, `UpgradeEngine`, `UpgradeBody`, `UpgradeFuel`, `DamagePanels`, `DamageDoors`, `DamageLights`, `DamageTires`, `VirtualWorld`, `Interior`, `PosX`, `PosY`, `PosZ`, `PosA`, `Color1`, `Color2`, `Siren`, `RespawnDelay` FROM `vehicles` WHERE `CharacterID`='%u' AND ParkingID IS NULL AND Destroyed='0';", PlayerCharInfo[playerid][ID]);
+        mysql_pquery(Database, query, "LoadPlayerVehicle", "bd", playerid, RaceCheck[playerid]);
+
         TogglePlayerSpectating(playerid, false);
         TogglePlayerControllable(playerid, true);
+        CallRemoteFunction("OnPlayerLogged", "i", playerid);
         PlayerLogged[playerid] = true;
         SendClientMessage(playerid, X11_CYAN, "SERVER: "WHITE"Server memerlukan waktu, "YELLOW"%d milisecond "WHITE"untuk memuat data char anda!", (GetTickCount() - GetPVarInt(playerid, "curtick")));
         SendClientMessage(playerid, X11_CYAN, "NOTICE: "WHITE"This feature is under construction, "YELLOW"please wait soon after updates"WHITE"!");
