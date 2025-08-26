@@ -1,10 +1,6 @@
-<div align="center">
-  <a href="https://ubuntu.com/" style="display: inline-block; vertical-align: middle; margin-right: 10px;">
-    <img src="https://i.imgur.com/xxieDkl.png" alt="Logo Ubuntu" width="150">
-  </a>
-  <span style="font-size: 2em; font-weight: bold; vertical-align: middle; margin: 0 15px;">X</span>
-  <img src="https://i.imgur.com/HIHzs55.png" alt="Revolution Multiplayer Logo" width="150" style="display: inline-block; vertical-align: middle; margin-left: 10px;">
-</div>
+<p align="center">
+  <img src="https://i.imgur.com/qtsmsG1.png" alt="Revolution Multiplayer Banner" width="500"/>
+</p>
 
 <h1 align="center">Revolution Multiplayer</h1>
 
