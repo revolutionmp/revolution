@@ -51,7 +51,7 @@ Pastikan Anda sudah menginstal perangkat lunak berikut:
 1.  **Clone repositori ini:**
     ```bash
     git clone https://github.com/revolutionmp/revolution.git
-    cd revolution-samp
+    cd revolution
     ```
 
 2.  **Buat file konfigurasi environment:**
