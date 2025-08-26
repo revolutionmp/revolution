@@ -1,7 +1,7 @@
 services:
-  db:
+  database:
     image: mariadb:lts
-    container_name: revolution_db
+    container_name: revolution_database
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -31,5 +31,5 @@ services:
       - "0.0.0.0:7777:7777/tcp"
       - "0.0.0.0:8888:8888/udp"
     depends_on:
-      db:
+      database:
         condition: service_healthy

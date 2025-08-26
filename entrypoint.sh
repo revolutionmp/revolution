@@ -3,7 +3,7 @@ set -e
 echo "--- Running Entrypoint Setup ---"
 echo "[INFO] Generating mysql.ini from .env variables..."
 cat << EOF > mysql.ini
-hostname = db
+hostname = database
 username = ${MYSQL_USER:-revolution}
 password = ${MYSQL_PASSWORD:-1abc}
 database = ${MYSQL_DATABASE:-rmp}

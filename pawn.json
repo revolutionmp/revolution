@@ -25,7 +25,7 @@
 	"runtimes": [
 		{
 			"name": "main",
-			"hostname": "Revolution",
+			"hostname": "Revolution Multiplayer",
 			"version": "0.3.7",
 			"language": "Bahasa Indonesia",
 			"port": 7777,
