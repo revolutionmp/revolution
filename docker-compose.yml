@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mariadb:lts
+    container_name: revolution_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./src/Components/rmp.data.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin --user=root --password=${MYSQL_ROOT_PASSWORD} ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  samp:
+    container_name: revolution_samp
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7777:7777/udp"
+      - "7777:7777/tcp"
+      - "8888:8888/udp"
+    depends_on:
+      db:
+        condition: service_healthy

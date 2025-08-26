@@ -59,7 +59,7 @@ public OnGameModeInit()
 {
 	new curtick = GetTickCount();
     new MySQLOpt:options = mysql_init_options();
-    mysql_set_option(options, POOL_SIZE, 5);
+    //mysql_set_option(options, POOL_SIZE, 5);
     Database = mysql_connect_file();
     mysql_log(ALL);
 
