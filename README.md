@@ -1,57 +1,92 @@
-# revolution
+<p align="center">
+  <img src="https://i.imgur.com/7e5LvT8.png" alt="Revolution Multiplayer Banner" width="200"/>
+</p>
 
-[![sampctl](https://img.shields.io/badge/sampctl-revolution-2f2f2f.svg?style=for-the-badge)](https://github.com/revolutionmp/revolution)
+<h1 align="center">Revolution Multiplayer</h1>
 
-<!--
-Short description of your library, why it's useful, some examples, pictures or
-videos. Link to your forum release thread too.
+<p align="center">
+  <strong>Sebuah gerakan <em>open-source</em> untuk membangun <em>base gamemode</em> San Andreas Multiplayer (SA-MP) yang modern, modular, dan gratis untuk komunitas Indonesia.</strong>
+</p>
 
-Remember: You can use "forumfmt" to convert this readme to forum BBCode!
+<p align="center">
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/revolutionmp/revolution?style=for-the-badge&logo=github">
+  <img alt="GitHub forks" src="https://img.shields.io/github/forks/revolutionmp/revolution?style=for-the-badge&logo=github">
+  <img alt="Discord" src="https://img.shields.io/discord/364749324833390593?style=for-the-badge&logo=discord&label=Discord">
+</p>
 
-What the sections below should be used for:
+---
 
-`## Installation`: Leave this section un-edited unless you have some specific
-additional installation procedure.
+## 📜 Tentang Proyek Ini
 
-`## Testing`: Whether your library is tested with a simple `main()` and `print`,
-unit-tested, or demonstrated via prompting the player to connect, you should
-include some basic information for users to try out your code in some way.
+**Revolution Multiplayer** lahir dari keresahan terhadap ekosistem SA-MP yang didominasi oleh skrip privat dan berbayar. Proyek ini adalah sebuah jawaban dan perlawanan sebuah gerakan untuk membuktikan bahwa komunitas bisa berkolaborasi untuk menciptakan *gamemode* berkualitas tinggi yang bisa diakses oleh semua orang, tanpa biaya.
 
-And finally, maintaining your version number`:
+Kami membangun fondasi *gamemode* dari nol dengan menggunakan tumpukan teknologi modern untuk memastikan proyek ini mudah dikelola, dikembangkan, dan dijalankan oleh siapa saja.
 
-* Follow [Semantic Versioning](https://semver.org/)
-* When you release a new version, update `VERSION` and `git tag` it
-* Versioning is important for sampctl to use the version control features
+---
 
-Happy Pawning!
--->
+## ✨ Fitur Utama
 
-## Installation
+* **100% Open-Source:** Semua kode kami terbuka. Anda bisa melihat, belajar, dan ikut berkontribusi langsung dalam pengembangan.
+* **Arsitektur Modern:** Kode disusun secara modular (`Core`, `Modules`, `Components`, `...`) agar mudah dipahami dan diperluas.
+* **Database ORM:** Menggunakan pendekatan **ORM (Object-Relational Mapping)** untuk interaksi database yang lebih aman, modern, dan efisien.
+* **Didukung Docker:** Menjalankan server untuk development menjadi sangat mudah, hanya dengan satu perintah. Tidak perlu lagi instalasi manual yang rumit.
+* **Manajemen Dependensi:** Menggunakan **sampctl** untuk mengelola semua dependensi PAWN secara otomatis.
+* **Voice In-Game:** Fondasi untuk fitur *voice chat* di dalam game sudah terintegrasi.
 
-Simply install to your project:
+---
 
-```bash
-sampctl package install revolutionmp/revolution
-```
+## 🚀 Memulai (Getting Started)
 
-## Usage
+Memulai server development Anda sangatlah mudah berkat Docker.
 
-<!--
-Write your code documentation or examples here. If your library is documented in
-the source code, direct users there. If not, list your API and describe it well
-in this section. If your library is passive and has no API, simply omit this
-section.
--->
+### Prasyarat
 
-## Testing
+Pastikan Anda sudah menginstal perangkat lunak berikut:
+* [Git](https://git-scm.com/downloads)
+* [Docker](https://www.docker.com/products/docker-desktop/)
+* [Docker Compose](https://docs.docker.com/compose/install/) (biasanya sudah termasuk dalam Docker Desktop)
 
-<!--
-Depending on whether your package is tested via in-game "demo tests" or
-y_testing unit-tests, you should indicate to readers what to expect below here.
--->
+### Instalasi
 
-To test, simply run the package:
+1.  **Clone repositori ini:**
+    ```bash
+    git clone https://github.com/revolutionmp/revolution.git
+    cd revolution-samp
+    ```
 
-```bash
-sampctl package run
-```
+2.  **Buat file konfigurasi environment:**
+    Salin file contoh `.env.example` menjadi `.env`. File ini akan menyimpan semua konfigurasi rahasia Anda.
+    ```bash
+    cp .env.example .env
+    ```
+
+3.  **Sesuaikan file `.env`:**
+    Buka file `.env` dan isi semua nilai yang kosong, terutama password untuk database.
+
+4.  **Jalankan dengan Docker Compose:**
+    Perintah ini akan membangun *image*, mengunduh database, dan menjalankan semuanya secara otomatis.
+    ```bash
+    docker compose up -d --build
+    ```
+
+Server Anda sekarang seharusnya sudah berjalan! Anda bisa melihat lognya dengan perintah `docker compose logs -f samp`.
+
+---
+
+## 🤝 Cara Berkontribusi
+
+Kami sangat terbuka untuk kontribusi dari siapa saja! Jika Anda ingin membantu, berikut adalah alur kerjanya:
+
+1.  **Fork** repositori ini.
+2.  Buat **Branch** baru untuk fitur atau perbaikan Anda (`git checkout -b fitur/NamaFitur`).
+3.  Lakukan perubahan dan **Commit** pekerjaan Anda (`git commit -m 'feat: Menambahkan fitur X'`).
+4.  **Push** ke branch Anda (`git push origin fitur/NamaFitur`).
+5.  Buka sebuah **Pull Request**.
+
+Jika Anda punya ide atau ingin berdiskusi sebelum mulai mengerjakan sesuatu, jangan ragu untuk bergabung dengan server **[Discord](https://discord.gg/ppByTcfZ8j)** kami!
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dilisensikan di bawah Lisensi GNU 3.0. Lihat file `LICENSE` untuk detail lebih lanjut.
