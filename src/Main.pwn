@@ -15,8 +15,8 @@
 #define YSI_NO_HEAP_MALLOC // The AMX is much larger because the allocation pool is embedded in the file.
 #define easyDialog_Mobile // Disable "HidePlayerDialog" for mobile users, that have issue with empty dialog.
 
-// #define AC_USE_CONFIG_FILES	false
-// #define NO_SUSPICION_LOGS
+#define AC_USE_CONFIG_FILES	false
+#define NO_SUSPICION_LOGS
 
 #include <sscanf2> // Allows us to read formatted data from a string rather than standard input.
 #include <crashdetect> // Debug runtime errors and server crashes. (Can't use with jit plugin)
@@ -37,11 +37,11 @@
 #include <ndialog-pages> // Dialog Pages adds the possibility to create paged dialog lists. It will basically calculate how many items will fit into one page and generate the Next button if there are too many.
 
 // Temporary Disable Anti-Cheat Nex-AC
-// #include <nex-ac_en.lang>
-// #include <nex-ac> // Nex Anticheat (Nex-AC) - is a comprehensive protection which combines powerful anticheat and protection against various attacks (flood, DoS).
+#include <nex-ac_en.lang>
+#include <nex-ac> // Nex Anticheat (Nex-AC) - is a comprehensive protection which combines powerful anticheat and protection against various attacks (flood, DoS).
 
 #include "Utils/Global"
-// #include "Utils/AntiCheat"
+#include "Utils/AntiCheat"
 #include "Core/Entry"
 #include "Modules/VehicleCmds"
 #include "Modules/VoiceCmds"

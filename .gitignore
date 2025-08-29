@@ -25,6 +25,7 @@ databases/
 # but make sure the `rcon_password` field is set externally
 # you can use the environment variable `SAMP_RCON_PASSWORD` to do this.
 server.cfg
+mysql.ini
 .env
 
 # Plugins directory

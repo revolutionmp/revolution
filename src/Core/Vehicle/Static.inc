@@ -12,7 +12,7 @@ SaveStaticVehicle(vehicleid)
     GetVehicleHealth(vehicleid, VehicleInfo[vehicleid][MaxHealth]);
     GetVehicleDamageStatus(vehicleid, VehicleInfo[vehicleid][DamagePanels], VehicleInfo[vehicleid][DamageDoors], VehicleInfo[vehicleid][DamageLights], VehicleInfo[vehicleid][DamageTires]);
     VehicleInfo[vehicleid][VirtualWorld] = GetVehicleVirtualWorld(vehicleid);
-    // VehicleInfo[vehicleid][Interior] = AntiCheatGetVehicleInterior(vehicleid);
+    VehicleInfo[vehicleid][Interior] = AntiCheatGetVehicleInterior(vehicleid);
     VehicleInfo[vehicleid][Interior] = 0;
     orm_update(VehicleInfo[vehicleid][ORM_ID]);
     return true;

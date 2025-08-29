@@ -51,7 +51,7 @@ SavePlayerVehicle(vehicleid)
     }
 
     VehicleInfo[vehicleid][VirtualWorld] = GetVehicleVirtualWorld(vehicleid);
-    // VehicleInfo[vehicleid][Interior] = AntiCheatGetVehicleInterior(vehicleid);
+    VehicleInfo[vehicleid][Interior] = AntiCheatGetVehicleInterior(vehicleid);
     VehicleInfo[vehicleid][Interior] = 0;
     orm_update(VehicleInfo[vehicleid][ORM_ID]);
     return true;
