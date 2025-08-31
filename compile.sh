@@ -40,14 +40,27 @@ compile_voice() {
     local COMPILER_PATH=".vscode/pawnc/bin/pawncc"
     local GAMEMODE_PATH="src/Voice.pwn"
     local OUTPUT_PATH="filterscripts/Voice.amx"
-    local INCLUDE_PATHS=(
-        -i="dependencies/pawn-stdlib/"
-        -i="dependencies/samp-stdlib/"
-        -i="dependencies/.resources/sampvoice-d8a2db/"
-        -i="dependencies/YSI-Includes/"
-        -i="src/"
-    )
-    LD_LIBRARY_PATH=${LIBRARY_PATH} ${COMPILER_PATH} ${GAMEMODE_PATH} ${INCLUDE_PATHS[@]} -o=${OUTPUT_PATH} "-;+" "-(+" "-\+" "-d3" "-Z+"
+    local INCLUDE_PATHS="-i=src"
+
+    if [ -d "dependencies" ]; then
+        for DIR in dependencies/*; do
+            if [ -d "${DIR}" ]; then
+                if [[ "$(basename "${DIR}")" != ".resources" ]]; then
+                    INCLUDE_PATHS="${INCLUDE_PATHS} -i=${DIR}"
+                fi
+            fi
+        done
+        
+        if [ -d "dependencies/.resources" ]; then
+            for DIR in dependencies/.resources/*; do
+                if [ -d "${DIR}" ]; then
+                    INCLUDE_PATHS="${INCLUDE_PATHS} -i=${DIR}"
+                fi
+            done
+        fi
+    fi
+
+    LD_LIBRARY_PATH=${LIBRARY_PATH} ${COMPILER_PATH} ${GAMEMODE_PATH} ${INCLUDE_PATHS} -o=${OUTPUT_PATH} "-;+" "-(+" "-\+" "-d3" "-Z+"
 }
 
 case $1 in
