@@ -43,7 +43,7 @@ compile_voice() {
     local INCLUDE_PATHS=(
         -i="dependencies/pawn-stdlib/"
         -i="dependencies/samp-stdlib/"
-        -i="dependencies/.resources/sampvoice-5d57da/"
+        -i="dependencies/.resources/sampvoice-d8a2db/"
         -i="dependencies/YSI-Includes/"
         -i="src/"
     )
