@@ -89,4 +89,4 @@ Jika Anda punya ide atau ingin berdiskusi sebelum mulai mengerjakan sesuatu, jan
 
 ## 📄 Lisensi
 
-Proyek ini dilisensikan di bawah Lisensi GNU 3.0. Lihat file `LICENSE` untuk detail lebih lanjut.
+Proyek ini dilisensikan di bawah Lisensi MIT. Lihat file `LICENSE` untuk detail lebih lanjut.
