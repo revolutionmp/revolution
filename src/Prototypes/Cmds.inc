@@ -43,7 +43,7 @@
     return 1;
 }
 
-@cmd() cc(playerid, params[], help)
+@cmd(.alts = {"cc"}) clearchat(playerid, params[], help)
 {
     new value_clear;
     sscanf(params, "D(20)", value_clear);
