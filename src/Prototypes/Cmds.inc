@@ -1,7 +1,6 @@
 @cmd() savestatic(playerid, params[], help)
 {
-    new vehicleid;
-    if (sscanf(params, "d", vehicleid)) return SendErrorMessage(playerid, "USAGE: /savestatic [vehicleid]");
+    extract params -> vehicleid; else return SendErrorMessage(playerid, "USAGE: /savestatic [vehicleid]");
     if (!IsValidVehicle(vehicleid)) return SendErrorMessage(playerid, "ERROR: invalid vehicle id");
     SaveStaticVehicle(vehicleid);
     return 1;
@@ -39,15 +38,18 @@
 
 @cmd() dspawn(playerid, params[], help)
 {
-    new vehicleid;
-    if (sscanf(params, "d", vehicleid)) return SendErrorMessage(playerid, "USAGE: /dspawn [vid]");
+    extract params -> vehicleid; else return SendErrorMessage(playerid, "USAGE: /dspawn [vid]");
     UnloadVehicle(vehicleid);
     return 1;
 }
 
 @cmd() cc(playerid, params[], help)
 {
-    forex(i,20)
+    new value_clear;
+    sscanf(params, "D(20)", value_clear);
+        
+    forex(i, value_clear)
         SendClientMessage(playerid, -1, " ");
+        
     return 1;
 }
