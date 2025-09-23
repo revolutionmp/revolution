@@ -105,6 +105,13 @@ public OnGameModeExit()
     DestroyAllDynamicObjects();
     DestroyAllDynamicPickups();
     DestroyAllDynamicRaceCPs();
+	for (new i = 0, j = GetPlayerPoolSize(); i <= j; i++) 
+	{
+		if (IsPlayerConnected(i))
+		{
+			OnPlayerDisconnect(i, 1);
+		}
+	}
     mysql_close(Database);
 	return 1;
 }
