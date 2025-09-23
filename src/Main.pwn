@@ -1,10 +1,17 @@
 #include <a_samp> // This MUST be include for SA:MP.
 
-#undef MAX_PLAYERS
-#undef MAX_VEHICLES
-
-#define MAX_PLAYERS		100 // 100 Max player's id
-#define MAX_VEHICLES	1801 // 1800 Max vehicle's id
+#if defined MAX_PLAYERS
+    #undef MAX_PLAYERS
+    #define MAX_PLAYERS	100 // 100 Max player's id
+#else
+    #define MAX_PLAYERS    100
+#endif
+#if defined MAX_VEHICLES
+    #undef MAX_VEHICLES
+    #define MAX_VEHICLES	1801 // 1800 Max vehicle's id
+#else
+    #define MAX_VEHICLES    1801
+#endif
 
 #define SERVER_NAME         "RevolutionMP"
 #define SERVER_NAME_SHORT   "R:MP"
@@ -78,7 +85,8 @@ public OnGameModeInit()
         EnableVehicleFriendlyFire();
         ShowPlayerMarkers(false);
         ShowNameTags(false);
-        //ManualVehicleEngineAndLights();
+        /* Manual Vehicle Engine and Lights */
+        //ManualVehicleEngineAndLights(); // <--
         SetNameTagDrawDistance(21.0);
         EnableStuntBonusForAll(false);
 
@@ -153,4 +161,16 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
     if (success == COMMAND_UNDEFINED)
         SendErrorMessage(playerid, "ERROR: Unknown command, see '/help' for a few commands information.");
     return COMMAND_OK;
+}
+
+public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+{
+    new size_names[MAX_PLAYER_NAME]
+    	;
+    GetPlayerName(playerid, size_names, sizeof(size_names));
+    printf("[COMMAND] %s: %s", size_names, cmdtext);
+    
+    /* not connected */
+    if (!IsPlayerConnected(playerid)) return 0;
+    return 1;
 }
