@@ -1,5 +1,5 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -x
 echo "--- Running Entrypoint Setup ---"
 echo "[INFO] Generating mysql.ini from .env variables..."
 cat << EOF > mysql.ini
