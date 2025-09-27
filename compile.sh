@@ -1,5 +1,5 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -x
 
 check_root() {
     if [ "$(id -u)" -ne 0 ]; then
@@ -12,7 +12,7 @@ check_root() {
 
 check_sampctl() {
     if ! dpkg -s sampctl > /dev/null 2>&1; then
-        check_root
+        check_root ""
         apt-get update && apt-get install -y wget curl
         curl https://raw.githubusercontent.com/Southclaws/sampctl/master/install-deb.sh | sed "s/sudo //g" | sh
     fi
@@ -20,28 +20,21 @@ check_sampctl() {
 
 check_lib_compiler() {
     if ! dpkg -s libc6:i386 lib32stdc++6 > /dev/null 2>&1; then
-        check_root
+        check_root ""
         dpkg --add-architecture i386
         apt-get update && apt-get install -y libc6:i386 lib32stdc++6
     fi
 }
 
 compile_gamemode() {
-    check_sampctl
+    check_sampctl ""
     sampctl ensure && sampctl build
 }
 
 compile_voice() {
-    check_lib_compiler
-    if [ ! -d filterscripts ]; then
-        mkdir filterscripts
-    fi
-    local LIBRARY_PATH=".vscode/pawnc/lib"
-    local COMPILER_PATH=".vscode/pawnc/bin/pawncc"
-    local GAMEMODE_PATH="src/Voice.pwn"
-    local OUTPUT_PATH="filterscripts/Voice.amx"
-    local INCLUDE_PATHS="-i=src"
-
+    check_lib_compiler ""
+    if [ ! -d "filterscripts" ] && mkdir -p "filterscripts"
+    local LIBRARY_PATH=".vscode/pawnc/lib" COMPILER_PATH=".vscode/pawnc/bin/pawncc" GAMEMODE_PATH="src/Voice.pwn" OUTPUT_PATH="filterscripts/Voice.amx" INCLUDE_PATHS="-i=src"
     if [ -d "dependencies" ]; then
         for DIR in dependencies/*; do
             if [ -d "${DIR}" ]; then
@@ -52,9 +45,9 @@ compile_voice() {
         done
         
         if [ -d "dependencies/.resources" ]; then
-            for DIR in dependencies/.resources/*; do
-                if [ -d "${DIR}" ]; then
-                    INCLUDE_PATHS="${INCLUDE_PATHS} -i=${DIR}"
+            for DIR2 in dependencies/.resources/*; do
+                if [ -d "${DIR2}" ]; then
+                    INCLUDE_PATHS="${INCLUDE_PATHS} -i=${DIR2}"
                 fi
             done
         fi
