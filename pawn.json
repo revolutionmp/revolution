@@ -37,7 +37,7 @@
 			"chatlogging": false,
 			"extra": {
 				"crashdetect_log": "logs/crashdetect.log",
-				"sv_port": "8888"
+				"sv_port": "50000"
 			},
 			"filterscripts": ["Voice"]
 		}

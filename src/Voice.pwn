@@ -6,8 +6,13 @@
 #include "Core/Voice/PhoneCall"
 #include "Core/Voice/Radio"
 
-forward OnPlayerLogged(playerid);
+#define KEY_B   0x42
+#define KEY_R   0x52
+#define KEY_X   0x58
+#define KEY_Z   0x5A
+#define KEY_SHIFT 0x10
 
+forward OnPlayerLogged(playerid);
 public OnPlayerLogged(playerid)
 {
     if (!(PlayerVoiceData[playerid][ProximityStream] = SvCreateDLStreamAtPlayer(10.0, SV_INFINITY, playerid, 0xFFFFFFFF, "")))
