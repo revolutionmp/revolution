@@ -28,6 +28,12 @@ ptask pTask100ms[100](playerid)
 	return 1;
 }
 
+@timer(100) OnPlayerUpdateEx(playerid)
+{
+	// OnPlayerUpdate 100/ms
+	return 1;
+}
+
 @timer(100) KickPlayer(playerid)
 {
 	Kick(playerid);
