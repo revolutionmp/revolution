@@ -115,7 +115,7 @@ public OnGameModeExit()
 	for (new i = 0, j = GetPlayerPoolSize(); i <= j; i++) 
 	{
 		if (IsPlayerConnected(i))
-			KickEx(playerid);
+			KickPlayer(playerid);
 	}
     mysql_close(Database);
 	return 1;
@@ -160,14 +160,9 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
     return COMMAND_OK;
 }
 
-public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-    new size_names[MAX_PLAYER_NAME]
-    	;
-    GetPlayerName(playerid, size_names, sizeof(size_names));
-    printf("[COMMAND] %s: %s", size_names, cmdtext);
-    
-    /* not connected */
-    if (!IsPlayerConnected(playerid)) return 0;
-    return 1;
+    printf("[COMMAND:] playerid=%d playername=%s cmdtext:%s success:%d", playerid, GetName(playerid), cmdtext, success);
+    if (!IsPlayerConnected(playerid)) return COMMAND_NO_PLAYER;
+    return COMMAND_OK;
 }
