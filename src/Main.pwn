@@ -115,7 +115,7 @@ public OnGameModeExit()
 	for (new i = 0, j = GetPlayerPoolSize(); i <= j; i++) 
 	{
 		if (IsPlayerConnected(i))
-			KickPlayer(playerid);
+			KickPlayer(i);
 	}
     mysql_close(Database);
 	return 1;
