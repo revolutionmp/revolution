@@ -162,7 +162,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 
 public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-    printf("[COMMAND:] playerid=%d playername=%s cmdtext:%s success:%d", playerid, GetName(playerid), cmdtext, success);
+    printf("[COMMAND]: playerid=%d playername=%s cmdtext=%s success=%d", playerid, GetName(playerid), cmdtext, success);
     if (!IsPlayerConnected(playerid)) return COMMAND_NO_PLAYER;
     return COMMAND_OK;
 }
