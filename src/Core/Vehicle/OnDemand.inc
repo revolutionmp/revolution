@@ -1,11 +1,19 @@
-CreateOnDemandVehicle(ownerid, modelid, virtualworld, interior, Float:posx, Float:posy, Float:posz, Float:posa, color1, color2, bool:siren)
+CreateOnDemandVehicle(ownerid, modelid, virtualworld, interior, Float:posx, Float:posy, Float:posz, Float:posa, color1, color2, bool:siren, plate[] = SERVER_NAME)
 {
     if (GetVehiclePoolToLimit() < 1) return false;
-    new vehicleid = CreateVehicle(modelid, posx, posy, posz, posa, color1, color2, -1, siren);
-    SetVehicleNumberPlate(vehicleid, " ");
+    new vehicleid;
+    if (siren == true) {
+        vehicleid = CreateVehicle(modelid, posx, posy, posz, posa, color1, color2, -1, siren);
+    } else {
+        vehicleid = CreateVehicle(modelid, posx, posy, posz, posa, color1, color2, -1);
+    }
+    
+    SetVehicleNumberPlate(vehicleid, plate);
     SetVehicleVirtualWorld(vehicleid, virtualworld);
     LinkVehicleToInterior(vehicleid, interior);
 
+    if (plate[0] != '\0')
+        format(VehicleInfo[vehicleid][Plate], 9, plate);
     VehicleInfo[vehicleid][CharacterID] = PlayerCharInfo[ownerid][ID];
     VehicleInfo[vehicleid][FactionID] = PlayerCharInfo[ownerid][FactionID];
     VehicleInfo[vehicleid][Model] = modelid;
@@ -23,5 +31,6 @@ CreateOnDemandVehicle(ownerid, modelid, virtualworld, interior, Float:posx, Floa
     VehicleInfo[vehicleid][Color2] = color2;
     VehicleInfo[vehicleid][Siren] = siren;
     Iter_Add(VehicleInfo, vehicleid);
+
     return true;
 }
