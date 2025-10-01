@@ -1,4 +1,4 @@
-CreateOnDemandVehicle(ownerid, modelid, virtualworld, interior, Float:posx, Float:posy, Float:posz, Float:posa, color1, color2, bool:siren, plate[] = SERVER_NAME)
+CreateOnDemandVehicle(ownerid, modelid, virtualworld, interior, Float:posx, Float:posy, Float:posz, Float:posa, color1, color2, bool:siren = false, plate[] = SERVER_NAME)
 {
     if (GetVehiclePoolToLimit() < 1) return false;
     new vehicleid;
