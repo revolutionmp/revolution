@@ -43,6 +43,14 @@
     return 1;
 }
 
+@cmd() netstats(playerid, params[], help)
+{
+    new server_stats[456];
+    GetNetworkStats(server_stats, sizeof(server_stats));
+    ShowPlayerDialog(playerid, 99999, DIALOG_STYLE_MSGBOX, "Server Network Stats", server_stats, "Close", "");
+    return 1;
+}
+
 @cmd(.alts = {"cc"}) clearchat(playerid, params[], help)
 {
     new value_clear;
