@@ -155,6 +155,71 @@ GetTimeDate(timestamp)
 }
 
 /*
+ <summary> Sends a formatted message from one player to another within a specified range. </summary>
+ <summary> The function checks if the target player is connected and within the given distance from the sender. </summary>
+ <summary> It also supports formatted strings (using varargs) and optionally displays a chat bubble above the sender’s head. </summary>
+ <summary> Use this to implement local chat systems where only nearby players receive the message. </summary>
+ <param name="playerid">The player sending the message.</param>
+ <param name="targetid">The target player who may receive the message.</param>
+ <param name="range">The maximum distance within which the target can see the message (default: 1.0).</param>
+ <param name="color">The color of the message text (default: white 0xFFFFFFFF).</param>
+ <param name="bubble">Whether to show a chat bubble above the sender’s head (0 = off, 1 = on).</param>
+ <param name="fmat">The format string used to compose the message (supports printf-style specifiers).</param>
+ <param name="...">Additional arguments for formatting (varargs).</param>
+ <returns>1 on success, always.</returns>
+*/
+SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFFFF, bubble = 0, const fmat[], {Float, _}:...)
+{
+    new Float:posX, Float:posY, Float:posZ;
+    GetPlayerPos(playerid, posX, posY, posZ);
+
+    if (IsPlayerConnected(targetid))
+    {
+        if (targetid != playerid)
+        {
+            if (IsPlayerInRangeOfPoint(targetid, range, posX, posY, posZ))
+            {
+                new str[145];
+                va_format(str, sizeof(str), fmat, va_start<6>);
+
+                SendClientMessage(targetid, color, str);
+
+                if (bubble != 0)
+                {
+                    SetPlayerChatBubble(playerid, str, color, range, 10000);
+                }
+            }
+        }
+    }
+    return 1;
+}
+
+SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFFFF, bubble = 0, const fmat[], {Float, _}:...))
+{
+	new Float:posX,
+		Float:posY,
+		Float:posZ
+	;
+	GetPlayerPos(playerid, posX, posY, posZ);
+	if (IsPlayerConnected(targetid)) {
+		if (targetid != playerid) {
+			if (IsPlayerInRangeOfPoint(targetid, range, posX, posY, posZ))
+			{
+				new
+					str[145]
+				;
+				va_format(str, sizeof (str), fmat, va_start<6>);
+				return SendClientMessage(targetid, color, str);
+				if (bubble != 0) {
+					SetPlayerChatBubble(playerid, str, color, range, 10000);
+				}
+			}
+		}
+	}
+	return 1;
+}
+				
+/*
  <summary> Retrieves the admin level of a player. </summary>
  <summary> This checks the PlayerAccountInfo and returns the privilege level. </summary>
  <summary> Use this when determining if a player has admin rights for commands or actions. </summary>
