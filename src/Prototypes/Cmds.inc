@@ -47,7 +47,7 @@
 {
     new server_stats[456];
     GetNetworkStats(server_stats, sizeof(server_stats));
-    ShowPlayerDialog(playerid, 99999, DIALOG_STYLE_MSGBOX, "Server Network Stats", server_stats, "Close", "");
+    ShowPlayerDialog(playerid, 9999, DIALOG_STYLE_MSGBOX, "Server Network Stats", server_stats, "Close", "");
     return 1;
 }
 
