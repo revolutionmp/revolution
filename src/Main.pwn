@@ -49,6 +49,7 @@
 
 #include "Utils/Global"
 #include "Utils/AntiCheat"
+#include "Utils/Anims.inc"
 #include "Core/Entry"
 #include "Modules/VehicleCmds"
 #include "Modules/VoiceCmds"
@@ -134,6 +135,7 @@ public OnPlayerDisconnect(playerid, reason)
 {
     if (PlayerLogged[playerid])
         UnloadPlayerOwnVehicle(playerid);
+	PreloadAnimLibs(playerid);
     static const ResetCharInfo[E_CHARACTER_DATA];
     static const ResetAccountInfo[E_ACCOUNT_DATA];
     PlayerCharInfo[playerid] = ResetCharInfo;
