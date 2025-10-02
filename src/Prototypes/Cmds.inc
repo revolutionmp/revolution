@@ -121,177 +121,68 @@
 
 @cmd() pm(playerid, params[], help)
 {
-    new targetid,
-        text_pm[128]
-    ;
+    new targetid, text_pm[128];
     if (sscanf(params, "us[128]", targetid, text_pm))
         return SendClientMessage(playerid, -1, "/pm <target> [text]");
-
-    if (strlen(text_pm) > 128) {
+    if (strlen(text_pm) > 128)
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    }
-    if (!IsPlayerConnected(targetid)) {
+    if (!IsPlayerConnected(targetid))
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Player not connected!");
-    }
-    if (targetid == playerid) {
+    if (targetid == playerid)
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: You can't PM yourself!");
-    }
-
-    new str[144];
-    format(str, 144, "{FFF070}PM from %s (%d): %s", GetName(playerid), playerid, text_pm);
-    SendClientMessage(targetid, -1, str);
-    SendClientMessage(playerid, -1, "Your message has been send..");
-
+    SendClientMessageInRange(playerid, targetid, 9999.0, 0xFFF070FF, 0, "PM from %s (%d): %s", GetName(playerid), playerid, text_pm);
+    SendClientMessage(playerid, -1, "Your message has been sent.");
     return 1;
 }
 
 @cmd() b(playerid, params[], help)
 {
-    extract params -> new string:text_local[144]; else return SendClientMessage(playerid, -1, "/local occ [text]");
-    if (strlen(text_local) > 128) {
+    extract params -> new string:text_local[128]; else
+        return SendClientMessage(playerid, -1, "/b [text]");
+    if (strlen(text_local) > 128)
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    }
-
-    new str[144],
-        Float:posX,
-        Float:posY,
-        Float:posZ
-    ;
-    GetPlayerPos(playerid, posX, posY, posZ);
-
-    format(str, sizeof(str), "%s : (( %s ))", GetName(playerid), text_local);
-    SendClientMessage(playerid, -1, str);
-
-    for (new i = 0; i < GetMaxPlayers(); i++) {
-        if (IsPlayerConnected(i)) {
-            if (i != playerid) {
-                if (IsPlayerInRangeOfPoint(i, 20.0, posX, posY, posZ)) {
-                    SendClientMessage(i, -1, str);
-                }
-            }
-        }
-    }
-
+    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 20.0, -1, 0, "%s: (( %s ))", GetName(playerid), text_local);
     return 1;
 }
 
 @cmd() s(playerid, params[], help)
 {
-    extract params -> new string:text_shout[144]; else return SendClientMessage(playerid, -1, "/s(hout) [text]");
-    if (strlen(text_shout) > 128) {
+    extract params -> new string:text_shout[128]; else
+        return SendClientMessage(playerid, -1, "/s(hout) [text]");
+    if (strlen(text_shout) > 128)
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    }
-
-    new str[144],
-        Float:posX,
-        Float:posY,
-        Float:posZ
-    ;
-    GetPlayerPos(playerid, posX, posY, posZ);
-
-    format(str, sizeof(str), "%s %s", GetName(playerid), text_shout);
-    SendClientMessage(playerid, 0x800080FF, str);
-
-    for (new i = 0; i < GetMaxPlayers(); i++) {
-        if (IsPlayerConnected(i)) {
-            if (i != playerid) {
-                if (IsPlayerInRangeOfPoint(i, 40.0, posX, posY, posZ)) {
-                    SendClientMessage(i, -1, str);
-                }
-            }
-        }
-    }
-
+    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 40.0, 0x800080FF, 0, "%s %s", GetName(playerid), text_shout);
     return 1;
 }
 
 @cmd() ame(playerid, params[], help)
 {
-    extract params -> new string:text_ame[144]; else return SendClientMessage(playerid, -1, "/ame [text]");
-    if (strlen(text_ame) > 128) {
+    extract params -> new string:text_ame[128]; else
+        return SendClientMessage(playerid, -1, "/ame [text]");
+    if (strlen(text_ame) > 128)
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    }
-
-    new str[144],
-        Float:posX,
-        Float:posY,
-        Float:posZ
-    ;
-    GetPlayerPos(playerid, posX, posY, posZ);
-
-    format(str, sizeof(str), "* %s %s", GetName(playerid), text_ame);
-    SendClientMessage(playerid, 0x800080FF, str);
-
-    for (new i = 0; i < GetMaxPlayers(); i++) {
-        if (IsPlayerConnected(i)) {
-            if (i != playerid) {
-                if (IsPlayerInRangeOfPoint(i, 10.1, posX, posY, posZ)) {
-                    SendClientMessage(i, -1, str);
-                }
-            }
-        }
-    }
-
+    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 10.0, 0x800080FF, 0, "* %s %s", GetName(playerid), text_ame);
     return 1;
 }
 
 @cmd() me(playerid, params[], help)
 {
-    extract params -> new string:text_me[144]; else return SendClientMessage(playerid, -1, "/me [text]");
-    if (strlen(text_me) > 128) {
+    extract params -> new string:text_me[128]; else
+        return SendClientMessage(playerid, -1, "/me [text]");
+    if (strlen(text_me) > 128)
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    }
-
-    new str[144],
-        Float:posX,
-        Float:posY,
-        Float:posZ
-    ;
-    GetPlayerPos(playerid, posX, posY, posZ);
-
-    format(str, sizeof(str), "* %s %s", GetName(playerid), text_me);
-    SendClientMessage(playerid, 0x800080FF, str);
-
-    for (new i = 0; i < GetMaxPlayers(); i++) {
-        if (IsPlayerConnected(i)) {
-            if (i != playerid) {
-                if (IsPlayerInRangeOfPoint(i, 10.1, posX, posY, posZ)) {
-                    SendClientMessage(i, -1, str);
-                }
-            }
-        }
-    }
-
+    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 10.0, 0x800080FF, 0, "* %s %s", GetName(playerid), text_me);
     return 1;
 }
 
 @cmd() do(playerid, params[], help)
 {
-    extract params -> new string:text_do[144]; else return SendClientMessage(playerid, -1, "/do [text]");
-    if (strlen(text_do) > 128) {
+    extract params -> new string:text_do[128]; else
+        return SendClientMessage(playerid, -1, "/do [text]");
+    if (strlen(text_do) > 128)
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    }
-
-    new str[144],
-        Float:posX,
-        Float:posY,
-        Float:posZ
-    ;
-    GetPlayerPos(playerid, posX, posY, posZ);
-
-    format(str, sizeof(str), "* %s (( %s ))", GetName(playerid), text_do);
-    SendClientMessage(playerid, 0x800080FF, str);
-
-    for (new i = 0; i < GetMaxPlayers(); i++) {
-        if (IsPlayerConnected(i)) {
-            if (i != playerid) {
-                if (IsPlayerInRangeOfPoint(i, 10.1, posX, posY, posZ)) {
-                    SendClientMessage(i, -1, str);
-                }
-            }
-        }
-    }
-
+    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 10.0, 0x800080FF, 0, "* %s (( %s ))", GetName(playerid), text_do);
     return 1;
 }
+
 
