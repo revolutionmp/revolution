@@ -49,7 +49,7 @@
 
 #include "Utils/Global"
 #include "Utils/AntiCheat"
-#include "Utils/Anims.inc"
+#include "Utils/Anims"
 #include "Core/Entry"
 #include "Modules/VehicleCmds"
 #include "Modules/VoiceCmds"
