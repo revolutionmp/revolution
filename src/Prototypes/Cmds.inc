@@ -80,7 +80,7 @@
     return 1;
 }
 
-@cmd online(playerid, params[], help)
+@cmd() online(playerid, params[], help)
 {
     new cnt = 0,
         player = 0
@@ -99,7 +99,7 @@
     return 1;
 }
 
-@cmd time(playerid, params[], help)
+@cmd() time(playerid, params[], help)
 {
     new str[26],
         hh,
@@ -119,7 +119,7 @@
     return 1;
 }
 
-@cmd pm(playerid, params[], help)
+@cmd() pm(playerid, params[], help)
 {
     new targetid,
         text_pm[128]
@@ -145,7 +145,7 @@
     return 1;
 }
 
-@cmd b(playerid, params[], help)
+@cmd() b(playerid, params[], help)
 {
     extract params -> new string:text_local[144]; else return SendClientMessage(playerid, -1, "/local occ [text]");
     if (strlen(text_local) > 128) {
@@ -175,7 +175,7 @@
     return 1;
 }
 
-@cmd s(playerid, params[], help)
+@cmd() s(playerid, params[], help)
 {
     extract params -> new string:text_shout[144]; else return SendClientMessage(playerid, -1, "/s(hout) [text]");
     if (strlen(text_shout) > 128) {
@@ -205,7 +205,7 @@
     return 1;
 }
 
-@cmd ame(playerid, params[], help)
+@cmd() ame(playerid, params[], help)
 {
     extract params -> new string:text_ame[144]; else return SendClientMessage(playerid, -1, "/ame [text]");
     if (strlen(text_ame) > 128) {
@@ -235,7 +235,7 @@
     return 1;
 }
 
-@cmd me(playerid, params[], help)
+@cmd() me(playerid, params[], help)
 {
     extract params -> new string:text_me[144]; else return SendClientMessage(playerid, -1, "/me [text]");
     if (strlen(text_me) > 128) {
@@ -265,7 +265,7 @@
     return 1;
 }
 
-@cmd do(playerid, params[], help)
+@cmd() do(playerid, params[], help)
 {
     extract params -> new string:text_do[144]; else return SendClientMessage(playerid, -1, "/do [text]");
     if (strlen(text_do) > 128) {
