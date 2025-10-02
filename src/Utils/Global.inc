@@ -54,6 +54,16 @@ GetTimeDate(timestamp)
     return string;
 }
 
+GetPlayerAdmin(playerid)
+{
+	if (PlayerAccountInfo[playerid][AdminLevel] < 1) {
+		return 0;
+	} else if (PlayerAccountInfo[playerid][AdminLevel] >= 1) {
+		return PlayerAccountInfo[playerid][AdminLevel];
+	}
+	return 0;
+}
+
 IsRoleplayName(const nickname[])
 {
     static Regex:regex;
