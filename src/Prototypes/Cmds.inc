@@ -137,7 +137,7 @@
     }
 
     new str[144];
-    format(str, 144, "{FFF070}PM from %s (%d): %s", GetName(playerid), playerid);
+    format(str, 144, "{FFF070}PM from %s (%d): %s", GetName(playerid), playerid, text_pm);
     SendClientMessage(targetid, -1, str);
     SendClientMessage(playerid, -1, "Your message has been send..");
 
