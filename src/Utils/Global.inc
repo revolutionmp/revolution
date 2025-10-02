@@ -113,12 +113,6 @@ ptask OnPlayerUpdateEx[100](playerid)
 	return 1;
 }
 
-ptask OnPlayerUpdateEx[100](playerid)
-{
-	// OnPlayerUpdate 100/ms
-	return 1;
-}
-
 /*
  <summary> Kicks a specific player from the server. </summary>
  <summary> This ensures forced disconnection after a timed interval. </summary>
