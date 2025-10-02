@@ -193,31 +193,6 @@ SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFF
     }
     return 1;
 }
-
-SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFFFF, bubble = 0, const fmat[], {Float, _}:...))
-{
-	new Float:posX,
-		Float:posY,
-		Float:posZ
-	;
-	GetPlayerPos(playerid, posX, posY, posZ);
-	if (IsPlayerConnected(targetid)) {
-		if (targetid != playerid) {
-			if (IsPlayerInRangeOfPoint(targetid, range, posX, posY, posZ))
-			{
-				new
-					str[145]
-				;
-				va_format(str, sizeof (str), fmat, va_start<6>);
-				return SendClientMessage(targetid, color, str);
-				if (bubble != 0) {
-					SetPlayerChatBubble(playerid, str, color, range, 10000);
-				}
-			}
-		}
-	}
-	return 1;
-}
 				
 /*
  <summary> Retrieves the admin level of a player. </summary>
