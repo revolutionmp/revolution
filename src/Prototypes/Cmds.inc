@@ -72,6 +72,7 @@
 }
 
 @cmd() hidenametags(playerid, params[], help)
+{
     for (new i = 0; i < MAX_PLAYERS; i++)
     {
         ShowPlayerNameTagForPlayer(playerid, i, false);
@@ -113,7 +114,7 @@
     SendClientMessage(playerid, -1, str);
     gettime(_hh, _mm, _ss);
     format(str, 26, "Server time: %02d:%02d:%02d", _hh, _mm, _ss);
-    SendClientMessage(playerid, -1, str)l
+    SendClientMessage(playerid, -1, str);
 
     return 1;
 }
@@ -143,7 +144,6 @@
 
     return 1;
 }
-
 
 @cmd b(playerid, params[], help)
 {
