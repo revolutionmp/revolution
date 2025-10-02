@@ -128,7 +128,7 @@
         return SendClientMessage(playerid, -1, "/pm <target> [text]");
 
     if (strlen(text_pm) > 128) {
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximmum 128!");
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
     }
     if (!IsPlayerConnected(targetid)) {
         return SendClientMessage(playerid, -1, "{FF0000}ERROR: Player not connected!");
@@ -149,7 +149,7 @@
 {
     extract params -> new string:text_local[144]; else return SendClientMessage(playerid, -1, "/local occ [text]");
     if (strlen(text_local) > 128) {
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximmum 128!");
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
     }
 
     new str[144],
@@ -179,7 +179,7 @@
 {
     extract params -> new string:text_shout[144]; else return SendClientMessage(playerid, -1, "/s(hout) [text]");
     if (strlen(text_shout) > 128) {
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximmum 128!");
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
     }
 
     new str[144],
@@ -209,7 +209,7 @@
 {
     extract params -> new string:text_ame[144]; else return SendClientMessage(playerid, -1, "/ame [text]");
     if (strlen(text_ame) > 128) {
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximmum 128!");
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
     }
 
     new str[144],
@@ -239,7 +239,7 @@
 {
     extract params -> new string:text_me[144]; else return SendClientMessage(playerid, -1, "/me [text]");
     if (strlen(text_me) > 128) {
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximmum 128!");
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
     }
 
     new str[144],
@@ -269,7 +269,7 @@
 {
     extract params -> new string:text_do[144]; else return SendClientMessage(playerid, -1, "/do [text]");
     if (strlen(text_do) > 128) {
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximmum 128!");
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
     }
 
     new str[144],
