@@ -144,6 +144,37 @@
     return 1;
 }
 
+
+@cmd b(playerid, params[], help)
+{
+    extract params -> new string:text_local[144]; else return SendClientMessage(playerid, -1, "/local occ [text]");
+    if (strlen(text_local) > 128) {
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximmum 128!");
+    }
+
+    new str[144],
+        Float:posX,
+        Float:posY,
+        Float:posZ
+    ;
+    GetPlayerPos(playerid, posX, posY, posZ);
+
+    format(str, sizeof(str), "%s : (( %s ))", GetName(playerid), text_shout);
+    SendClientMessage(playerid, -1, str);
+
+    for (new i = 0; i < GetMaxPlayers(); i++) {
+        if (IsPlayerConnected(i)) {
+            if (i != playerid) {
+                if (IsPlayerInRangeOfPoint(i, 20.0, posX, posY, posZ)) {
+                    SendClientMessage(i, -1, str);
+                }
+            }
+        }
+    }
+
+    return 1;
+}
+
 @cmd s(playerid, params[], help)
 {
     extract params -> new string:text_shout[144]; else return SendClientMessage(playerid, -1, "/s(hout) [text]");
@@ -159,12 +190,12 @@
     GetPlayerPos(playerid, posX, posY, posZ);
 
     format(str, sizeof(str), "%s %s", GetName(playerid), text_shout);
-    SendClientMessage(playerid, -1, str);
+    SendClientMessage(playerid, 0x800080FF, str);
 
     for (new i = 0; i < GetMaxPlayers(); i++) {
         if (IsPlayerConnected(i)) {
             if (i != playerid) {
-                if (IsPlayerInRangeOfPoint(i, 15.0, posX, posY, posZ)) {
+                if (IsPlayerInRangeOfPoint(i, 40.0, posX, posY, posZ)) {
                     SendClientMessage(i, -1, str);
                 }
             }
@@ -189,7 +220,7 @@
     GetPlayerPos(playerid, posX, posY, posZ);
 
     format(str, sizeof(str), "* %s %s", GetName(playerid), text_ame);
-    SendClientMessage(playerid, -1, str);
+    SendClientMessage(playerid, 0x800080FF, str);
 
     for (new i = 0; i < GetMaxPlayers(); i++) {
         if (IsPlayerConnected(i)) {
@@ -219,7 +250,7 @@
     GetPlayerPos(playerid, posX, posY, posZ);
 
     format(str, sizeof(str), "* %s %s", GetName(playerid), text_me);
-    SendClientMessage(playerid, -1, str);
+    SendClientMessage(playerid, 0x800080FF, str);
 
     for (new i = 0; i < GetMaxPlayers(); i++) {
         if (IsPlayerConnected(i)) {
@@ -249,7 +280,7 @@
     GetPlayerPos(playerid, posX, posY, posZ);
 
     format(str, sizeof(str), "* %s (( %s ))", GetName(playerid), text_do);
-    SendClientMessage(playerid, -1, str);
+    SendClientMessage(playerid, 0x800080FF, str);
 
     for (new i = 0; i < GetMaxPlayers(); i++) {
         if (IsPlayerConnected(i)) {
