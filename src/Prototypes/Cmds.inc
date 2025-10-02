@@ -159,7 +159,7 @@
     ;
     GetPlayerPos(playerid, posX, posY, posZ);
 
-    format(str, sizeof(str), "%s : (( %s ))", GetName(playerid), text_shout);
+    format(str, sizeof(str), "%s : (( %s ))", GetName(playerid), text_local);
     SendClientMessage(playerid, -1, str);
 
     for (new i = 0; i < GetMaxPlayers(); i++) {
