@@ -104,8 +104,15 @@ ptask pTask100ms[100](playerid)
 /*
  <summary> Custom OnPlayerUpdate task that executes every 100 ms for each player. </summary>
  <summary> This is mainly for handling real-time updates or fast player state checks. </summary>
- <summary> Use this if you need to track player actions at short intervals. </summary>
+ <summary> SA-MP’s native OnPlayerUpdate callback runs ~30 times per second (≈ every 33 ms), while this custom OnPlayerUpdateEx runs only 10 times per second (every 100 ms). </summary>
+ <summary> Use this if you need to track player actions at shorter intervals but with reduced frequency compared to the native callback (lighter on performance). </summary>
 */
+ptask OnPlayerUpdateEx[100](playerid)
+{
+	// OnPlayerUpdate 100/ms
+	return 1;
+}
+
 ptask OnPlayerUpdateEx[100](playerid)
 {
 	// OnPlayerUpdate 100/ms
