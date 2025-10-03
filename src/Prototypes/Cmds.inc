@@ -43,6 +43,16 @@
     return 1;
 }
 
+@cmd() netstats(playerid, params[], help)
+{
+    new
+        server_stats[456]
+    ;
+    GetNetworkStats(server_stats, 456);
+    ShowPlayerDialog(playerid, 9999, DIALOG_STYLE_MSGBOX, "Server Network Stats", server_stats, "Close", "");
+    return 1;
+}
+
 @cmd(.alts = {"cc"}) clearchat(playerid, params[], help)
 {
     new value_clear;
@@ -51,5 +61,98 @@
     forex(i, value_clear)
         SendClientMessage(playerid, -1, " ");
         
+    return 1;
+}
+
+@cmd() shownametags(playerid, params[], help)
+{
+    for (new i = 0; i < MAX_PLAYERS; i++)
+    {
+        ShowPlayerNameTagForPlayer(playerid, i, true);
+    }
+    return 1;
+}
+
+@cmd() hidenametags(playerid, params[], help)
+{
+    for (new i = 0; i < MAX_PLAYERS; i++)
+    {
+        ShowPlayerNameTagForPlayer(playerid, i, false);
+    }
+    return 1;
+}
+
+@cmd() online(playerid, params[], help)
+{
+    new cnt = 0,
+        player = 0
+    ;
+    for (; player < GetMaxPlayers(); player++)
+    {
+        if (IsPlayerConnected(player)) {
+            cnt++;
+        }
+    }
+    if (cnt >= 1) {
+        new str[4];
+        format(str, sizeof(str), "Online player: %d", cnt);
+        SendClientMessage(playerid, -1, str); 
+    }
+    return 1;
+}
+
+@cmd() time(playerid, params[], help)
+{
+    new str[26],
+        hh,
+        mm,
+        _hh,
+        _mm,
+        _ss
+    ;
+    
+    GetPlayerTime(playerid, hh, mm);
+    format(str, 26, "Your time: %02d:%02d", hh, mm);
+    SendClientMessage(playerid, -1, str);
+    gettime(_hh, _mm, _ss);
+    format(str, 26, "Server time: %02d:%02d:%02d", _hh, _mm, _ss);
+    SendClientMessage(playerid, -1, str);
+
+    return 1;
+}
+
+@cmd() pm(playerid, params[], help)
+{
+    new targetid, text_pm[128];
+    if (sscanf(params, "us[128]", targetid, text_pm))
+        return SendClientMessage(playerid, -1, "/pm <target> [text]");
+    if (strlen(text_pm) > 128)
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
+    if (!IsPlayerConnected(targetid))
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Player not connected!");
+    if (targetid == playerid)
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: You can't PM yourself!");
+    SendClientMessageInRange(playerid, targetid, 9999.0, 0xFFF070FF, 0, "PM from %s (%d): %s", GetName(playerid), playerid, text_pm);
+    SendClientMessage(playerid, -1, "Your message has been sent.");
+    return 1;
+}
+
+@cmd() b(playerid, params[], help)
+{
+    extract params -> new string:text_local[128]; else
+        return SendClientMessage(playerid, -1, "/b [text]");
+    if (strlen(text_local) > 128)
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
+    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 20.0, -1, 0, "%s: (( %s ))", GetName(playerid), text_local);
+    return 1;
+}
+
+@cmd() s(playerid, params[], help)
+{
+    extract params -> new string:text_shout[128]; else
+        return SendClientMessage(playerid, -1, "/s(hout) [text]");
+    if (strlen(text_shout) > 128)
+        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
+    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 40.0, 0x800080FF, 0, "%s %s", GetName(playerid), text_shout);
     return 1;
 }

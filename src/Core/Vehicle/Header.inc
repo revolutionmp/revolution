@@ -14,6 +14,7 @@
 #define VEHICLE_NO_TRUNK            0
 #define VEHICLE_HAVE_TRUNK          1
 
+// slot
 #define MAX_PLAYER_VEHICLES			15
 
 // ID 0 CID 0 (Temp), ID >0 CID 0 (Static), ID 0 CID >0 (Demand), ID >0 CID >0 (Player)

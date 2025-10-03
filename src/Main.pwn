@@ -49,6 +49,7 @@
 
 #include "Utils/Global"
 #include "Utils/AntiCheat"
+#include "Utils/Anims"
 #include "Core/Entry"
 #include "Modules/VehicleCmds"
 #include "Modules/VoiceCmds"
@@ -80,15 +81,14 @@ public OnGameModeInit()
         new query[128];
         printf("[MySQL] Connected to the database successfully (%d).", _:Database);
         mysql_set_charset("utf8mb4", Database);
-        SetGameModeText(MODE_VERSION);
-        DisableInteriorEnterExits();
-        EnableVehicleFriendlyFire();
-        ShowPlayerMarkers(false);
-        ShowNameTags(false);
-        /* Manual Vehicle Engine and Lights */
-        //ManualVehicleEngineAndLights(); // <--
-        SetNameTagDrawDistance(21.0);
-        EnableStuntBonusForAll(false);
+        SetGameModeText(MODE_VERSION); // Set the name of the game mode, which appears in the server browser (client).
+        DisableInteriorEnterExits(); // Disable all the interior entrances and exits in the game (the yellow arrows at doors).
+        EnableVehicleFriendlyFire(); // Enable friendly fire for team vehicles. Players will be unable to damage teammates' vehicles (SetPlayerTeam must be used!).
+        ShowPlayerMarkers(false); // https://open.mp/docs/scripting/functions/SetPlayerMarkerForPlayer
+        ShowNameTags(false); // https://open.mp/docs/scripting/functions/ShowNameTags
+        //ManualVehicleEngineAndLights(); // This prevents the game automatically turning the engine on/off when players enter/exit vehicles and headlights automatically coming on when it is dark.
+        SetNameTagDrawDistance(21.0); // https://open.mp/docs/scripting/functions/SetNameTagDrawDistance
+        EnableStuntBonusForAll(false); // Enables or disables stunt bonuses for all players. If enabled, players will receive monetary rewards when performing a stunt in a vehicle (e.g. a wheelie).
 
         Streamer_TickRate(150);
         Streamer_VisibleItems(STREAMER_TYPE_OBJECT, 300);
@@ -116,9 +116,7 @@ public OnGameModeExit()
 	for (new i = 0, j = GetPlayerPoolSize(); i <= j; i++) 
 	{
 		if (IsPlayerConnected(i))
-		{
-			OnPlayerDisconnect(i, 1);
-		}
+			KickPlayer(i);
 	}
     mysql_close(Database);
 	return 1;
@@ -137,6 +135,7 @@ public OnPlayerDisconnect(playerid, reason)
 {
     if (PlayerLogged[playerid])
         UnloadPlayerOwnVehicle(playerid);
+	PreloadAnimLibs(playerid);
     static const ResetCharInfo[E_CHARACTER_DATA];
     static const ResetAccountInfo[E_ACCOUNT_DATA];
     PlayerCharInfo[playerid] = ResetCharInfo;
@@ -163,14 +162,9 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
     return COMMAND_OK;
 }
 
-public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-    new size_names[MAX_PLAYER_NAME]
-    	;
-    GetPlayerName(playerid, size_names, sizeof(size_names));
-    printf("[COMMAND] %s: %s", size_names, cmdtext);
-    
-    /* not connected */
-    if (!IsPlayerConnected(playerid)) return 0;
-    return 1;
+    printf("[COMMAND]: playerid=%d playername=%s cmdtext=%s success=%d", playerid, GetName(playerid), cmdtext, success);
+    if (!IsPlayerConnected(playerid)) return COMMAND_NO_PLAYER;
+    return COMMAND_OK;
 }

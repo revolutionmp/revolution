@@ -133,3 +133,308 @@ UnloadVehicle(vehicleid)
     DestroyVehicle(vehicleid);
     return 1;
 }
+
+SetToggleVehicleEngine(vehid)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (engine == VEHICLE_PARAMS_UNSET
+            || engine == VEHICLE_PARAMS_OFF) {
+        SetVehicleParamsEx(
+            vehid,
+            VEHICLE_PARAMS_ON,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            VEHICLE_PARAMS_OFF,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    }
+}
+
+SetToggleVehicleLights(vehid)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (lights == VEHICLE_PARAMS_UNSET
+            || lights == VEHICLE_PARAMS_OFF) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            VEHICLE_PARAMS_ON,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            VEHICLE_PARAMS_OFF,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    }
+}
+
+SetToggleVehicleDoorsLocked(vehid)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (doors == VEHICLE_PARAMS_UNSET
+            || doors == VEHICLE_PARAMS_OFF) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            VEHICLE_PARAMS_ON,
+            bonnet,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            VEHICLE_PARAMS_OFF,
+            bonnet,
+            boot,
+            objective
+        );
+    }
+}
+
+SetToggleVehicleHood(vehid)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (bonnet == VEHICLE_PARAMS_UNSET
+            || bonnet == VEHICLE_PARAMS_OFF) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            VEHICLE_PARAMS_ON,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            VEHICLE_PARAMS_OFF,
+            boot,
+            objective
+        );
+    }
+}
+
+SetToggleVehicleTrunk(vehid)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (boot == VEHICLE_PARAMS_UNSET
+            || boot == VEHICLE_PARAMS_OFF) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            VEHICLE_PARAMS_ON,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            VEHICLE_PARAMS_OFF,
+            objective
+        );
+    }
+}
+
+SetVehicleEngineState(vehid, const setstate)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (setstate) {
+        SetVehicleParamsEx(
+            vehid,
+            VEHICLE_PARAMS_ON,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            VEHICLE_PARAMS_OFF,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    }
+}
+
+SetVehicleLightsState(vehid, const setstate)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (setstate) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            VEHICLE_PARAMS_ON,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            VEHICLE_PARAMS_OFF,
+            alarm,
+            doors,
+            bonnet,
+            boot,
+            objective
+        );
+    }
+}
+
+SetVehicleDoorsLockedState(vehid, const setstate)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (setstate) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            VEHICLE_PARAMS_ON,
+            bonnet,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            VEHICLE_PARAMS_OFF,
+            bonnet,
+            boot,
+            objective
+        );
+    }
+}
+
+stock SetVehicleHoodState(vehid, const setstate)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (setstate) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            VEHICLE_PARAMS_ON,
+            boot,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            VEHICLE_PARAMS_OFF,
+            boot,
+            objective
+        );
+    }
+}
+
+SetVehicleTrunkState(vehid, const setstate)
+{
+    new engine,lights,alarm,doors,bonnet,boot,objective;
+    GetVehicleParamsEx(vehid,engine,lights,alarm,doors,bonnet,boot,objective);
+
+    if (setstate) {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            VEHICLE_PARAMS_ON,
+            objective
+        );
+    } else {
+        SetVehicleParamsEx(
+            vehid,
+            engine,
+            lights,
+            alarm,
+            doors,
+            bonnet,
+            VEHICLE_PARAMS_OFF,
+            objective
+        );
+    }
+}
