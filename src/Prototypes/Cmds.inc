@@ -154,35 +154,3 @@
     SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 40.0, 0x800080FF, 0, "%s %s", GetName(playerid), text_shout);
     return 1;
 }
-
-@cmd() ame(playerid, params[], help)
-{
-    extract params -> new string:text_ame[128]; else
-        return SendClientMessage(playerid, -1, "/ame [text]");
-    if (strlen(text_ame) > 128)
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 10.0, 0x800080FF, 0, "* %s %s", GetName(playerid), text_ame);
-    return 1;
-}
-
-@cmd() me(playerid, params[], help)
-{
-    extract params -> new string:text_me[128]; else
-        return SendClientMessage(playerid, -1, "/me [text]");
-    if (strlen(text_me) > 128)
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 10.0, 0x800080FF, 0, "* %s %s", GetName(playerid), text_me);
-    return 1;
-}
-
-@cmd() do(playerid, params[], help)
-{
-    extract params -> new string:text_do[128]; else
-        return SendClientMessage(playerid, -1, "/do [text]");
-    if (strlen(text_do) > 128)
-        return SendClientMessage(playerid, -1, "{FF0000}ERROR: Your text is very long. maximum 128!");
-    SendClientMessageInRange(playerid, INVALID_PLAYER_ID, 10.0, 0x800080FF, 0, "* %s (( %s ))", GetName(playerid), text_do);
-    return 1;
-}
-
-
