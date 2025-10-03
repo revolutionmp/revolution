@@ -1,5 +1,5 @@
 #include <YSI_Coding\y_hooks>
-#include <YSI_Coding\y_va.inc>
+#include <YSI_Coding\y_va
 
 /*
  <summary> A shorthand loop macro for iterating from 0 up to a given limit. </summary>
