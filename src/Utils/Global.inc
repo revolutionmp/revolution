@@ -180,14 +180,10 @@ SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFF
         {
             if (!IsPlayerConnected(i)) continue;
             if (i == playerid) continue;
-
-            if (IsPlayerInRangeOfPoint(i, range, posX, posY, posZ))
-            {
+            if (IsPlayerInRangeOfPoint(i, range, posX, posY, posZ)) 
                 SendClientMessage(i, color, str);
-
-                if (bubble != 0)
-                    SetPlayerChatBubble(playerid, str, color, range, 10000);
-            }
+            if (bubble != 0)
+                SetPlayerChatBubble(playerid, str, color, range, 10000);
         }
     }
     else
@@ -195,12 +191,9 @@ SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFF
         if (IsPlayerConnected(targetid) && targetid != playerid)
         {
             if (IsPlayerInRangeOfPoint(targetid, range, posX, posY, posZ))
-            {
                 SendClientMessage(targetid, color, str);
-
-                if (bubble != 0)
-                    SetPlayerChatBubble(playerid, str, color, range, 10000);
-            }
+            if (bubble != 0)
+                SetPlayerChatBubble(playerid, str, color, range, 10000);
         }
     }
     return 1;
