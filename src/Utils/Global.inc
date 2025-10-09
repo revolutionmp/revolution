@@ -206,13 +206,13 @@ SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFF
 */
 GetPlayerAdmin(playerid)
 {
-	new adminlevel = PlayerAccountInfo[playerid][AdminLevel];
-	if (adminlevel < 1) {
-		return 0;
-	} else if (adminlevel >= 1) {
-		return adminlevel;
+	new
+		ret = PlayerAccountInfo[playerid][AdminLevel]
+	;
+	if (ret < 1) {
+		ret = -1;
 	}
-	return 0;
+	return ret;
 }
 
 /*
