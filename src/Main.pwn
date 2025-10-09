@@ -1,11 +1,14 @@
 #include <a_samp> // This MUST be include for SA:MP.
 
+/// This will be useless if your host resets MAX_PLAYERS to a specific player slot limit.
+/// Limits: 1000
 #if defined MAX_PLAYERS
     #undef MAX_PLAYERS
     #define MAX_PLAYERS	100 // 100 Max player's id
 #else
     #define MAX_PLAYERS    100
 #endif
+/// Limits: 2000
 #if defined MAX_VEHICLES
     #undef MAX_VEHICLES
     #define MAX_VEHICLES	1801 // 1800 Max vehicle's id
