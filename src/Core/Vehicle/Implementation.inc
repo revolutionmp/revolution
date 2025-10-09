@@ -149,8 +149,7 @@ SetToggleVehicleEngine(vehid)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -160,8 +159,7 @@ SetToggleVehicleEngine(vehid)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -180,8 +178,7 @@ SetToggleVehicleLights(vehid)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -191,8 +188,7 @@ SetToggleVehicleLights(vehid)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -211,8 +207,7 @@ SetToggleVehicleDoorsLocked(vehid)
             VEHICLE_PARAMS_ON,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -222,8 +217,7 @@ SetToggleVehicleDoorsLocked(vehid)
             VEHICLE_PARAMS_OFF,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -242,8 +236,7 @@ SetToggleVehicleHood(vehid)
             doors,
             VEHICLE_PARAMS_ON,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -253,8 +246,7 @@ SetToggleVehicleHood(vehid)
             doors,
             VEHICLE_PARAMS_OFF,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -273,8 +265,7 @@ SetToggleVehicleTrunk(vehid)
             doors,
             bonnet,
             VEHICLE_PARAMS_ON,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -284,8 +275,7 @@ SetToggleVehicleTrunk(vehid)
             doors,
             bonnet,
             VEHICLE_PARAMS_OFF,
-            objective
-        );
+            objective);
     }
 }
 
@@ -303,8 +293,7 @@ SetVehicleEngineState(vehid, const setstate)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -314,8 +303,7 @@ SetVehicleEngineState(vehid, const setstate)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -333,8 +321,7 @@ SetVehicleLightsState(vehid, const setstate)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -344,8 +331,7 @@ SetVehicleLightsState(vehid, const setstate)
             doors,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -363,8 +349,7 @@ SetVehicleDoorsLockedState(vehid, const setstate)
             VEHICLE_PARAMS_ON,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -374,8 +359,7 @@ SetVehicleDoorsLockedState(vehid, const setstate)
             VEHICLE_PARAMS_OFF,
             bonnet,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -393,8 +377,7 @@ stock SetVehicleHoodState(vehid, const setstate)
             doors,
             VEHICLE_PARAMS_ON,
             boot,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -404,8 +387,7 @@ stock SetVehicleHoodState(vehid, const setstate)
             doors,
             VEHICLE_PARAMS_OFF,
             boot,
-            objective
-        );
+            objective);
     }
 }
 
@@ -423,8 +405,7 @@ SetVehicleTrunkState(vehid, const setstate)
             doors,
             bonnet,
             VEHICLE_PARAMS_ON,
-            objective
-        );
+            objective);
     } else {
         SetVehicleParamsEx(
             vehid,
@@ -434,7 +415,6 @@ SetVehicleTrunkState(vehid, const setstate)
             doors,
             bonnet,
             VEHICLE_PARAMS_OFF,
-            objective
-        );
+            objective);
     }
 }
