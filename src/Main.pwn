@@ -20,31 +20,31 @@
 #define SERVER_NAME_SHORT   "R:MP"
 #define MODE_VERSION        "R:MP v0.1.0 Alpha"
 
-#define FOREACH_NO_BOTS // Disabled the "NPC", "Bot", and "Character" from iterators.
-#define FOREACH_NO_LOCALS // Disabled the "LocalActor" and "LocalVehicle" from iterators.
-#define YSI_NO_HEAP_MALLOC // The AMX is much larger because the allocation pool is embedded in the file.
-#define easyDialog_Mobile // Disable "HidePlayerDialog" for mobile users, that have issue with empty dialog.
+#define FOREACH_NO_BOTS		// Disabled the "NPC", "Bot", and "Character" from iterators.
+#define FOREACH_NO_LOCALS	// Disabled the "LocalActor" and "LocalVehicle" from iterators.
+#define YSI_NO_HEAP_MALLOC	// The AMX is much larger because the allocation pool is embedded in the file.
+#define easyDialog_Mobile	// Disable "HidePlayerDialog" for mobile users, that have issue with empty dialog.
 
 #define AC_USE_CONFIG_FILES	false
 #define NO_SUSPICION_LOGS
 
-#include <sscanf2> // Allows us to read formatted data from a string rather than standard input.
-#include <crashdetect> // Debug runtime errors and server crashes. (Can't use with jit plugin)
-#include <streamer> // This plugin streams objects, pickups, checkpoints, race checkpoints, map icons, 3D text labels, and actors at user-defined server ticks.
-#include <YSI_Coding\y_va> // Provides ___, a companion to ..., which passes all variable parameters to another function instead of receiving them.
-#include <YSI_Coding\y_timers> // Wraps SetTimer and SetTimerEx to give compile-time parameter type checks.
-#include <YSI_Coding\y_hooks> // Provides language syntax and support for 'hooking' functions. Allowing you to intercept them, or use the same callback in multiple files at once.
-#include <YSI_Data\y_iterate> // The latest version of foreach with many extras for iterators and special iterators.
-#include <YSI_Server\y_colours> // Provides many functions for manipulating colours, as well as several thousand pre-defined named colours
-#include <YSI_Visual\y_commands> // The most fully featured command processor for SA:MP.
-#include <a_mysql> // This plugin allows you to use MySQL in PAWN.
-#include <samp_bcrypt> // A bcrypt plugin for samp in Rust.
-#include <distance> // Performing proximity/distance checks between them and finding the closest entities to other entities.
-#include <VehiclePartPosition> // This function to obtain the position in the world of a certain part of the vehicle, being able to define a distance between the part of the vehicle and the position in the world
-#include <chrono> // A modern Pawn library for working with dates and times.
-#include <Pawn.Regex> // Plugin that adds support for regular expressions in Pawn.
-#include <easyDialog> // The purpose of this include is to make dialogs easier to use in general.
-#include <ndialog-pages> // Dialog Pages adds the possibility to create paged dialog lists. It will basically calculate how many items will fit into one page and generate the Next button if there are too many.
+#include <sscanf2>					// Allows us to read formatted data from a string rather than standard input.
+#include <crashdetect>				// Debug runtime errors and server crashes. (Can't use with jit plugin)
+#include <streamer>					// This plugin streams objects, pickups, checkpoints, race checkpoints, map icons, 3D text labels, and actors at user-defined server ticks.
+#include <YSI_Coding\y_va>			// Provides ___, a companion to ..., which passes all variable parameters to another function instead of receiving them.
+#include <YSI_Coding\y_timers>		// Wraps SetTimer and SetTimerEx to give compile-time parameter type checks.
+#include <YSI_Coding\y_hooks>		// Provides language syntax and support for 'hooking' functions. Allowing you to intercept them, or use the same callback in multiple files at once.
+#include <YSI_Data\y_iterate>		// The latest version of foreach with many extras for iterators and special iterators.
+#include <YSI_Server\y_colours>		// Provides many functions for manipulating colours, as well as several thousand pre-defined named colours
+#include <YSI_Visual\y_commands>	// The most fully featured command processor for SA:MP.
+#include <a_mysql>					// This plugin allows you to use MySQL in PAWN.
+#include <samp_bcrypt>				// A bcrypt plugin for samp in Rust.
+#include <distance>					// Performing proximity/distance checks between them and finding the closest entities to other entities.
+#include <VehiclePartPosition>		// This function to obtain the position in the world of a certain part of the vehicle, being able to define a distance between the part of the vehicle and the position in the world
+#include <chrono>					// A modern Pawn library for working with dates and times.
+#include <Pawn.Regex>				// Plugin that adds support for regular expressions in Pawn.
+#include <easyDialog>				// The purpose of this include is to make dialogs easier to use in general.
+#include <ndialog-pages>			// Dialog Pages adds the possibility to create paged dialog lists. It will basically calculate how many items will fit into one page and generate the Next button if there are too many.
 
 // Temporary Disable Anti-Cheat Nex-AC
 #include <nex-ac_en.lang>
@@ -84,14 +84,14 @@ public OnGameModeInit()
         new query[128];
         printf("[MySQL] Connected to the database successfully (%d).", _:Database);
         mysql_set_charset("utf8mb4", Database);
-        SetGameModeText(MODE_VERSION); // Set the name of the game mode, which appears in the server browser (client).
-        DisableInteriorEnterExits(); // Disable all the interior entrances and exits in the game (the yellow arrows at doors).
-        EnableVehicleFriendlyFire(); // Enable friendly fire for team vehicles. Players will be unable to damage teammates' vehicles (SetPlayerTeam must be used!).
-        ShowPlayerMarkers(false); // https://open.mp/docs/scripting/functions/SetPlayerMarkerForPlayer
-        ShowNameTags(false); // https://open.mp/docs/scripting/functions/ShowNameTags
-        //ManualVehicleEngineAndLights(); // This prevents the game automatically turning the engine on/off when players enter/exit vehicles and headlights automatically coming on when it is dark.
-        SetNameTagDrawDistance(21.0); // https://open.mp/docs/scripting/functions/SetNameTagDrawDistance
-        EnableStuntBonusForAll(false); // Enables or disables stunt bonuses for all players. If enabled, players will receive monetary rewards when performing a stunt in a vehicle (e.g. a wheelie).
+        SetGameModeText(MODE_VERSION);		// Set the name of the game mode, which appears in the server browser (client).
+        DisableInteriorEnterExits();		// Disable all the interior entrances and exits in the game (the yellow arrows at doors).
+        EnableVehicleFriendlyFire();		// Enable friendly fire for team vehicles. Players will be unable to damage teammates' vehicles (SetPlayerTeam must be used!).
+        ShowPlayerMarkers(false);			// Change the colour of a player's nametag and radar blip for another player.
+        ShowNameTags(false);				// Toggle the drawing of nametags, health bars and armor bars above players.
+        //ManualVehicleEngineAndLights();	// This prevents the game automatically turning the engine on/off when players enter/exit vehicles and headlights automatically coming on when it is dark.
+        SetNameTagDrawDistance(21.0);		// Set the maximum distance to display the names of players.
+        EnableStuntBonusForAll(false);		// Enables or disables stunt bonuses for all players. If enabled, players will receive monetary rewards when performing a stunt in a vehicle (e.g. a wheelie).
 
         Streamer_TickRate(150);
         Streamer_VisibleItems(STREAMER_TYPE_OBJECT, 300);
