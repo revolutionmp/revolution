@@ -12,8 +12,7 @@ CreateOnDemandVehicle(ownerid, modelid, virtualworld, interior, Float:posx, Floa
     SetVehicleVirtualWorld(vehicleid, virtualworld);
     LinkVehicleToInterior(vehicleid, interior);
 
-    if (plate[0] != '\0')
-        format(VehicleInfo[vehicleid][Plate], 9, plate);
+    if (plate[0] != '\0') format(VehicleInfo[vehicleid][Plate], 9, plate);
     VehicleInfo[vehicleid][CharacterID] = PlayerCharInfo[ownerid][ID];
     VehicleInfo[vehicleid][FactionID] = PlayerCharInfo[ownerid][FactionID];
     VehicleInfo[vehicleid][Model] = modelid;
