@@ -21,7 +21,7 @@
 #define SERVER_NAME_SHORT     "R:MP"
 #define MODE_VERSION          "R:MP v0.1.0 Alpha"
 
-#define FOREACH_NO_BOTS              // Disabled the "NPC", "Bot", and "Character" from iterators.
+#define FOREACH_NO_BOTS             // Disabled the "NPC", "Bot", and "Character" from iterators.
 #define FOREACH_NO_LOCALS           // Disabled the "LocalActor" and "LocalVehicle" from iterators.
 #define YSI_NO_HEAP_MALLOC          // The AMX is much larger because the allocation pool is embedded in the file.
 #define easyDialog_Mobile           // Disable "HidePlayerDialog" for mobile users, that have issue with empty dialog.
@@ -29,7 +29,7 @@
 #define AC_USE_CONFIG_FILES   false
 #define NO_SUSPICION_LOGS
 
-#include <sscanf2>                    // Allows us to read formatted data from a string rather than standard input.
+#include <sscanf2>                   // Allows us to read formatted data from a string rather than standard input.
 #include <crashdetect>               // Debug runtime errors and server crashes. (Can't use with jit plugin)
 #include <streamer>                  // This plugin streams objects, pickups, checkpoints, etc.
 #include <YSI_Coding\y_va>           // Passes all variable parameters to another function.
