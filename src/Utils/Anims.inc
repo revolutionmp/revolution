@@ -46,11 +46,9 @@ stock PreloadAnimLibs(playerid) {
     ;
 
     if (sscanf(params, "d", index)) return SendClientMessage(playerid, -1, "/anim [index 1-1811]");
-    if (index < 1 || index > MAX_ANIMS) {
+    if (index < 1 || index > MAX_ANIMS)
       return SendClientMessage(playerid, -1,"Invalid index!");
-    }
-    else
-    {
+    else {
         GetAnimationName(index, animlib, 32, animname, 32);
         ApplyAnimation(playerid, animlib, animname, 4.1, 1, 0, 0, 1, 0, 1);
     }
