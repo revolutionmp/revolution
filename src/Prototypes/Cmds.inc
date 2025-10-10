@@ -81,7 +81,7 @@
 {
     if (GetPlayerAdmin(playerid)) {
         new self_or_all, value_clear;
-        if (sscanf(params, "D(0)D(20)", value_clear))
+        if (sscanf(params, "D(0)D(20)", self_or_all, value_clear))
             return SendClientMessage(playerid, -1, "/cc [self or all <0/1>] <value>");
 
         switch(self_or_all) {
@@ -100,7 +100,8 @@
         }
     } else {
         new value_clear;
-        sscanf(params, "D(20)", value_clear);
+        if (sscanf(params, "D(20)", value_clear))
+            return SendClientMessage(playerid, -1, "/cc <value>");
             
         forex(i, value_clear)
             SendClientMessage(playerid, -1, " ");
