@@ -46,6 +46,7 @@
 #include <Pawn.Regex>                // Adds regex support in Pawn.
 #include <easyDialog>                // Makes dialogs easier to use.
 #include <ndialog-pages>             // Create paged dialog lists with Next button support.
+#include <command-guess>             // Command Guess - 'did you mean'.
 
 // Temporary Disable Anti-Cheat Nex-AC
 #include <nex-ac_en.lang>
@@ -161,8 +162,16 @@ public OnQueryError(errorid, const error[], const callback[], const query[], MyS
 
 public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-    if (success == COMMAND_UNDEFINED)
-        SendErrorMessage(playerid, "ERROR: Unknown command, see '/help' for a few commands information.");
+    if (success == COMMAND_UNDEFINED) {
+        new 
+            guessCmd[32],
+            dist = Command_Guess(guessCmd, cmdtext);
+
+        if (dist < 3)
+            SendClientMessageEx(playerid, -1, "{FF0000}ERROR:{FFFFFF} \"%s\" is not found, did you mean \"%s\"?", cmdtext, guessCmd);
+	else
+            SendClientMessageEx(playerid, -1, "{FF0000}ERROR:{FFFFFF} \"%s\" is not found", cmdtext);
+    }
     return COMMAND_OK;
 }
 

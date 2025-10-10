@@ -1,5 +1,5 @@
 #include <YSI_Coding\y_hooks>
-#include <YSI_Coding\y_va
+#include <YSI_Coding\y_va>
 
 /*
  <summary> A shorthand loop macro for iterating from 0 up to a given limit. </summary>
@@ -147,6 +147,27 @@ GetTimeDate(timestamp)
     new Timestamp:ts = Timestamp:(timestamp+GMT), string[256];
     TimeFormat(ts,"%a %d %b %Y, %T",string);
     return string;
+}
+
+/*
+ <summary>Sends a formatted message to a player with a specified color.</summary>
+ <summary>This wraps SendClientMessage with support for format strings and variable arguments (like printf).</summary>
+ <summary>Use this when you want to include dynamic values (e.g., player names, numbers) in your messages.</summary>
+ <param name="playerid">The target player ID to receive the message.</param>
+ <param name="colour">The color of the message in ARGB format (e.g., 0xFFFFFFFF for white).</param>
+ <param name="fmat">The format string (printf-style).</param>
+ <param name="...">Additional arguments to be formatted into the message.</param>
+ <returns>Returns 1 after sending the message.</returns>
+*/
+#if ! defined SendClientMessageEx
+	#define SendClientMessageEx _@SendClientMessageEx
+#endif
+stock _@SendClientMessageEx(playerid, colour, const fmat[],  va_args<>)
+{
+	new
+		str[145];
+	va_format(str, sizeof (str), fmat, va_start<3>);
+	return SendClientMessage(playerid, colour, str);
 }
 
 /*
