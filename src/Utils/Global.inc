@@ -225,7 +225,10 @@ SendClientMessageInRange(playerid, targetid, Float:range = 1.0, color = 0xFFFFFF
  <summary> This checks the PlayerAccountInfo and returns the privilege level. </summary>
  <summary> Use this when determining if a player has admin rights for commands or actions. </summary>
 */
-GetPlayerAdmin(playerid)
+#if ! defined GetPlayerAdmin
+	#define GetPlayerAdmin _@GetPlayerAdmin
+#endif
+stock _@GetPlayerAdmin(playerid)
 {
 	new
 		ret = PlayerAccountInfo[playerid][AdminLevel]
