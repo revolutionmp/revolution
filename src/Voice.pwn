@@ -14,8 +14,6 @@
 #define KEY_X     0x58
 /* [Z] */
 #define KEY_Z     0x5A
-/* SHIFT */
-#define KEY_SHIFT 0x10
 /* [A] */
 #define KEY_A     0x41
 /* [C] */
@@ -24,16 +22,6 @@
 #define KEY_V     0x56
 /* [M] */
 #define KEY_M     0x4D
-/* SPACE */
-#define KEY_SPACE 0x20
-/* CTRL */
-#define KEY_CTRL  0x11
-/* ALT */
-#define KEY_ALT   0x12
-/* TAB */
-#define KEY_TAB   0x09
-/* ESC */
-#define KEY_ESC   0x1B
 
 forward OnPlayerLogged(playerid);
 public OnPlayerLogged(playerid)
