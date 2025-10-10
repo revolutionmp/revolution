@@ -61,7 +61,8 @@
 @cmd() slap(playerid, params[], help)
 {
     if (!GetPlayerAdmin(playerid)) return 1;
-    extract params -> targetid; else return SendClientMessage(playerid, -1, "/slap <targetid/name>");
+    new targetid;
+    if (sscanf(params, "u", targetid)) return SendClientMessage(playerid, -1, "/slap <targetid/name>");
     if (!IsPlayerConnected(targetid))
         return SendClientMessage(playerid, -1, "{FF0000}Player not connected!");
 
