@@ -8,6 +8,7 @@
 
 @cmd() aveh(playerid, params[], help)
 {
+    if (!GetPlayerAdmin(playerid)) return 1;
     new ownerid, modelid, Float:pos[4];
     if (sscanf(params, "ud", ownerid, modelid)) return SendErrorMessage(playerid, "USAGE: /createpveh [owner] [model]");
     GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
@@ -18,6 +19,7 @@
 
 @cmd() asveh(playerid, params[], help)
 {
+    if (!GetPlayerAdmin(playerid)) return 1;
     new ownerid, modelid, Float:pos[4];
     if (sscanf(params, "ud", ownerid, modelid)) return SendErrorMessage(playerid, "USAGE: /createpveh [model]");
     GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
@@ -28,6 +30,7 @@
 
 @cmd() adveh(playerid, params[], help)
 {
+    if (!GetPlayerAdmin(playerid)) return 1;
     new ownerid, modelid, Float:pos[4];
     if (sscanf(params, "ud", ownerid, modelid)) return SendErrorMessage(playerid, "USAGE: /adveh [owner] [model]");
     GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
@@ -38,6 +41,7 @@
 
 @cmd() dspawn(playerid, params[], help)
 {
+    if (!GetPlayerAdmin(playerid)) return 1;
     extract params -> vehicleid; else return SendErrorMessage(playerid, "USAGE: /dspawn [vid]");
     UnloadVehicle(vehicleid);
     return 1;
@@ -50,17 +54,56 @@
     ;
     GetNetworkStats(server_stats, 456);
     ShowPlayerDialog(playerid, 9999, DIALOG_STYLE_MSGBOX, "Server Network Stats", server_stats, "Close", "");
+
     return 1;
 }
 
+@cmd() slap(playerid, params[], help)
+{
+    if (!GetPlayerAdmin(playerid)) return 1;
+    extract params -> targetid; else return SendClientMessage(playerid, -1, "/slap <targetid/name>");
+    if (!IsPlayerConnected(targetid))
+        return SendClientMessage(playerid, -1, "{FF0000}Player not connected!");
+
+    new Float:pPos[3];
+    new Float:curr_health;
+
+    GetPlayerPos(targetid, pPos[0], pPos[1], pPos[2]);
+    GetPlayerHealth(targetid, curr_health);
+    SetPlayerPos(targetid, pPos[0], pPos[1], pPos[2] + 5.0);
+    SetPlayerHealth(targetid, curr_health);
+
+    return 1;
+}
+    
 @cmd(.alts = {"cc"}) clearchat(playerid, params[], help)
 {
-    new value_clear;
-    sscanf(params, "D(20)", value_clear);
-        
-    forex(i, value_clear)
-        SendClientMessage(playerid, -1, " ");
-        
+    if (GetPlayerAdmin(playerid)) {
+        new self_or_all, value_clear;
+        if (sscanf(params, "D(0)D(20)", value_clear))
+            return SendClientMessage(playerid, -1, "/cc [self or all <0/1>] <value>");
+
+        switch(self_or_all) {
+            case 0: {
+                forex(i, value_clear)
+                    SendClientMessage(playerid, -1, " ");
+            }
+            case 1: {
+                forex(i, value_clear)
+                    SendClientMessageToAll(-1, " ");
+            }
+            default: {
+                forex(i, value_clear)
+                    SendClientMessage(playerid, -1, " ");
+            }
+        }
+    } else {
+        new value_clear;
+        sscanf(params, "D(20)", value_clear);
+            
+        forex(i, value_clear)
+            SendClientMessage(playerid, -1, " ");
+    }
     return 1;
 }
 
