@@ -1,11 +1,18 @@
-CreateTemporaryVehicle(modelid, virtualworld, interior, Float:posx, Float:posy, Float:posz, Float:posa, color1, color2, bool:siren)
+CreateTemporaryVehicle(modelid, virtualworld, interior, Float:posx, Float:posy, Float:posz, Float:posa, color1, color2, bool:siren = false, plate[] = SERVER_NAME)
 {
     if (GetVehiclePoolToLimit() < 1) return false;
-    new vehicleid = CreateVehicle(modelid, posx, posy, posz, posa, color1, color2, -1, siren);
-    SetVehicleNumberPlate(vehicleid, " ");
+    new vehicleid;
+    if (siren == true) {
+        vehicleid = CreateVehicle(modelid, posx, posy, posz, posa, color1, color2, -1, siren);
+    } else {
+        vehicleid = CreateVehicle(modelid, posx, posy, posz, posa, color1, color2, -1);
+    }
+
+    SetVehicleNumberPlate(vehicleid, plate);
     SetVehicleVirtualWorld(vehicleid, virtualworld);
     LinkVehicleToInterior(vehicleid, interior);
 
+    if (plate[0] != '\0') format(VehicleInfo[vehicleid][Plate], 9, plate);
     VehicleInfo[vehicleid][Model] = modelid;
     VehicleInfo[vehicleid][Health] = 1000.0;
     VehicleInfo[vehicleid][MaxHealth] = 1000.0;
@@ -21,5 +28,6 @@ CreateTemporaryVehicle(modelid, virtualworld, interior, Float:posx, Float:posy, 
     VehicleInfo[vehicleid][Color2] = color2;
     VehicleInfo[vehicleid][Siren] = siren;
     Iter_Add(Vehicles, vehicleid);
+
     return true;
 }
