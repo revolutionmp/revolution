@@ -76,36 +76,48 @@
 
     return 1;
 }
-    
+
 @cmd(.alts = {"cc"}) clearchat(playerid, params[], help)
 {
-    if (GetPlayerAdmin(playerid)) {
+    if (GetPlayerAdmin(playerid))
+    {
         new self_or_all, value_clear;
-        if (sscanf(params, "D(0)D(20)", self_or_all, value_clear))
-            return SendClientMessage(playerid, -1, "/cc [self or all <0/1>] <value>");
 
-        switch(self_or_all) {
-            case 0: {
+        if (sscanf(params, "D(0)D(20)", self_or_all, value_clear))
+            return SendClientMessage(playerid, -1, "Usage: /cc [self/all <0/1>] <value>");
+
+        if (value_clear <= 0) value_clear = 20;
+
+        switch (self_or_all)
+        {
+            case 0:
+            {
                 forex(i, value_clear)
                     SendClientMessage(playerid, -1, " ");
             }
-            case 1: {
+            case 1:
+            {
                 forex(i, value_clear)
                     SendClientMessageToAll(-1, " ");
             }
-            default: {
+            default:
+            {
                 forex(i, value_clear)
                     SendClientMessage(playerid, -1, " ");
             }
         }
     } else {
         new value_clear;
+
         if (sscanf(params, "D(20)", value_clear))
-            return SendClientMessage(playerid, -1, "/cc <value>");
-            
+            return SendClientMessage(playerid, -1, "Usage: /cc <value>");
+
+        if (value_clear <= 0) value_clear = 20;
+
         forex(i, value_clear)
             SendClientMessage(playerid, -1, " ");
     }
+
     return 1;
 }
 
