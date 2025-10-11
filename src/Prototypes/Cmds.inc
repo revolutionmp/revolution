@@ -121,15 +121,6 @@
     return 1;
 }
 
-@cmd() shownametags(playerid, params[], help)
-{
-    for (new i = 0; i < MAX_PLAYERS; i++)
-    {
-        ShowPlayerNameTagForPlayer(playerid, i, true);
-    }
-    return 1;
-}
-
 @cmd() hidenametags(playerid, params[], help)
 {
     for (new i = 0; i < MAX_PLAYERS; i++)
