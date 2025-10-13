@@ -1,54 +1,60 @@
-#include <a_samp> // This MUST be include for SA:MP.
+#include <a_samp>                      // This MUST be include for SA:MP.
 
+/// This will be useless if your host resets MAX_PLAYERS to a specific player slot limit.
+/// Limits: 1000
 #if defined MAX_PLAYERS
     #undef MAX_PLAYERS
-    #define MAX_PLAYERS	100 // 100 Max player's id
+    #define MAX_PLAYERS        100     // 100 Max player's id
 #else
-    #define MAX_PLAYERS    100
+    #define MAX_PLAYERS        100
 #endif
+
+/// Limits: 2000
 #if defined MAX_VEHICLES
     #undef MAX_VEHICLES
-    #define MAX_VEHICLES	1801 // 1800 Max vehicle's id
+    #define MAX_VEHICLES       1801    // 1800 Max vehicle's id
 #else
-    #define MAX_VEHICLES    1801
+    #define MAX_VEHICLES       1801
 #endif
 
-#define SERVER_NAME         "RevolutionMP"
-#define SERVER_NAME_SHORT   "R:MP"
-#define MODE_VERSION        "R:MP v0.1.0 Alpha"
+#define SERVER_NAME           "RevolutionMP"
+#define SERVER_NAME_SHORT     "R:MP"
+#define MODE_VERSION          "R:MP v0.1.0 Alpha"
 
-#define FOREACH_NO_BOTS // Disabled the "NPC", "Bot", and "Character" from iterators.
-#define FOREACH_NO_LOCALS // Disabled the "LocalActor" and "LocalVehicle" from iterators.
-#define YSI_NO_HEAP_MALLOC // The AMX is much larger because the allocation pool is embedded in the file.
-#define easyDialog_Mobile // Disable "HidePlayerDialog" for mobile users, that have issue with empty dialog.
+#define FOREACH_NO_BOTS             // Disabled the "NPC", "Bot", and "Character" from iterators.
+#define FOREACH_NO_LOCALS           // Disabled the "LocalActor" and "LocalVehicle" from iterators.
+#define YSI_NO_HEAP_MALLOC          // The AMX is much larger because the allocation pool is embedded in the file.
+#define easyDialog_Mobile           // Disable "HidePlayerDialog" for mobile users, that have issue with empty dialog.
 
-#define AC_USE_CONFIG_FILES	false
+#define AC_USE_CONFIG_FILES   false
 #define NO_SUSPICION_LOGS
 
-#include <sscanf2> // Allows us to read formatted data from a string rather than standard input.
-#include <crashdetect> // Debug runtime errors and server crashes. (Can't use with jit plugin)
-#include <streamer> // This plugin streams objects, pickups, checkpoints, race checkpoints, map icons, 3D text labels, and actors at user-defined server ticks.
-#include <YSI_Coding\y_va> // Provides ___, a companion to ..., which passes all variable parameters to another function instead of receiving them.
-#include <YSI_Coding\y_timers> // Wraps SetTimer and SetTimerEx to give compile-time parameter type checks.
-#include <YSI_Coding\y_hooks> // Provides language syntax and support for 'hooking' functions. Allowing you to intercept them, or use the same callback in multiple files at once.
-#include <YSI_Data\y_iterate> // The latest version of foreach with many extras for iterators and special iterators.
-#include <YSI_Server\y_colours> // Provides many functions for manipulating colours, as well as several thousand pre-defined named colours
-#include <YSI_Visual\y_commands> // The most fully featured command processor for SA:MP.
-#include <a_mysql> // This plugin allows you to use MySQL in PAWN.
-#include <samp_bcrypt> // A bcrypt plugin for samp in Rust.
-#include <distance> // Performing proximity/distance checks between them and finding the closest entities to other entities.
-#include <VehiclePartPosition> // This function to obtain the position in the world of a certain part of the vehicle, being able to define a distance between the part of the vehicle and the position in the world
-#include <chrono> // A modern Pawn library for working with dates and times.
-#include <Pawn.Regex> // Plugin that adds support for regular expressions in Pawn.
-#include <easyDialog> // The purpose of this include is to make dialogs easier to use in general.
-#include <ndialog-pages> // Dialog Pages adds the possibility to create paged dialog lists. It will basically calculate how many items will fit into one page and generate the Next button if there are too many.
+#include <sscanf2>                   // Allows us to read formatted data from a string rather than standard input.
+#include <crashdetect>               // Debug runtime errors and server crashes. (Can't use with jit plugin)
+#include <streamer>                  // This plugin streams objects, pickups, checkpoints, etc.
+#include <YSI_Coding\y_va>           // Passes all variable parameters to another function.
+#include <YSI_Coding\y_timers>       // Wraps SetTimer and SetTimerEx to give compile-time parameter type checks.
+#include <YSI_Coding\y_hooks>        // Provides support for 'hooking' functions.
+#include <YSI_Data\y_iterate>        // foreach with many extras for iterators and special iterators.
+#include <YSI_Server\y_colours>      // Functions for manipulating colours, with many named colours.
+#include <YSI_Visual\y_commands>     // Fully featured command processor for SA:MP.
+#include <a_mysql>                   // Allows you to use MySQL in PAWN.
+#include <samp_bcrypt>               // A bcrypt plugin for samp. written in Rust.
+#include <distance>                  // Proximity/distance checks between entities.
+#include <VehiclePartPosition>       // Get world position of specific vehicle parts.
+#include <chrono>                    // A modern Pawn library for working with dates and times.
+#include <Pawn.Regex>                // Adds regex support in Pawn.
+#include <easyDialog>                // Makes dialogs easier to use.
+#include <ndialog-pages>             // Create paged dialog lists with Next button support.
+#include <command-guess>             // Command Guess - 'did you mean'.
 
 // Temporary Disable Anti-Cheat Nex-AC
 #include <nex-ac_en.lang>
-#include <nex-ac> // Nex Anticheat (Nex-AC) - is a comprehensive protection which combines powerful anticheat and protection against various attacks (flood, DoS).
+#include <nex-ac>                    // Nex Anticheat — anti-cheat and DoS protection.
 
 #include "Utils/Global"
 #include "Utils/AntiCheat"
+#include "Utils/Anims"
 #include "Core/Entry"
 #include "Modules/VehicleCmds"
 #include "Modules/VoiceCmds"
@@ -80,15 +86,14 @@ public OnGameModeInit()
         new query[128];
         printf("[MySQL] Connected to the database successfully (%d).", _:Database);
         mysql_set_charset("utf8mb4", Database);
-        SetGameModeText(MODE_VERSION);
-        DisableInteriorEnterExits();
-        EnableVehicleFriendlyFire();
-        ShowPlayerMarkers(false);
-        ShowNameTags(false);
-        /* Manual Vehicle Engine and Lights */
-        //ManualVehicleEngineAndLights(); // <--
-        SetNameTagDrawDistance(21.0);
-        EnableStuntBonusForAll(false);
+        SetGameModeText(MODE_VERSION);         // Set the name of the game mode, which appears in the server browser (client).
+        DisableInteriorEnterExits();           // Disable all the interior entrances and exits in the game (the yellow arrows at doors).
+        EnableVehicleFriendlyFire();           // Enable friendly fire for team vehicles. Players will be unable to damage teammates' vehicles (SetPlayerTeam must be used!).
+        ShowPlayerMarkers(false);              // Change the colour of a player's nametag and radar blip for another player.
+        ShowNameTags(false);                   // Toggle the drawing of nametags, health bars and armor bars above players.
+        //ManualVehicleEngineAndLights();      // This prevents the game automatically turning the engine on/off when players enter/exit vehicles and headlights automatically coming on when it is dark.
+        SetNameTagDrawDistance(21.0);          // Set the maximum distance to display the names of players.
+        EnableStuntBonusForAll(false);         // Enables or disables stunt bonuses for all players. If enabled, players will receive monetary rewards when performing a stunt in a vehicle (e.g. a wheelie).
 
         Streamer_TickRate(150);
         Streamer_VisibleItems(STREAMER_TYPE_OBJECT, 300);
@@ -116,9 +121,7 @@ public OnGameModeExit()
 	for (new i = 0, j = GetPlayerPoolSize(); i <= j; i++) 
 	{
 		if (IsPlayerConnected(i))
-		{
-			OnPlayerDisconnect(i, 1);
-		}
+			KickPlayer(i);
 	}
     mysql_close(Database);
 	return 1;
@@ -137,6 +140,7 @@ public OnPlayerDisconnect(playerid, reason)
 {
     if (PlayerLogged[playerid])
         UnloadPlayerOwnVehicle(playerid);
+	PreloadAnimLibs(playerid);
     static const ResetCharInfo[E_CHARACTER_DATA];
     static const ResetAccountInfo[E_ACCOUNT_DATA];
     PlayerCharInfo[playerid] = ResetCharInfo;
@@ -158,19 +162,22 @@ public OnQueryError(errorid, const error[], const callback[], const query[], MyS
 
 public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-    if (success == COMMAND_UNDEFINED)
-        SendErrorMessage(playerid, "ERROR: Unknown command, see '/help' for a few commands information.");
+    if (success == COMMAND_UNDEFINED) {
+        new 
+            guessCmd[32],
+            dist = Command_Guess(guessCmd, cmdtext);
+
+        if (dist < 3)
+            SendClientMessageEx(playerid, -1, "{FF0000}ERROR:{FFFFFF} \"%s\" is not found, did you mean \"%s\"?", cmdtext, guessCmd);
+		else
+            SendClientMessageEx(playerid, -1, "{FF0000}ERROR:{FFFFFF} \"%s\" is not found", cmdtext);
+    }
     return COMMAND_OK;
 }
 
-public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_ERRORS:success)
 {
-    new size_names[MAX_PLAYER_NAME]
-    	;
-    GetPlayerName(playerid, size_names, sizeof(size_names));
-    printf("[COMMAND] %s: %s", size_names, cmdtext);
-    
-    /* not connected */
-    if (!IsPlayerConnected(playerid)) return 0;
-    return 1;
+    printf("[COMMAND]: playerid=%d playername=%s cmdtext=%s success=%d", playerid, GetName(playerid), cmdtext, success);
+    if (!IsPlayerConnected(playerid)) return COMMAND_NO_PLAYER;
+    return COMMAND_OK;
 }

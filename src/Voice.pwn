@@ -6,11 +6,22 @@
 #include "Core/Voice/PhoneCall"
 #include "Core/Voice/Radio"
 
-#define KEY_B   0x42
-#define KEY_R   0x52
-#define KEY_X   0x58
-#define KEY_Z   0x5A
-#define KEY_SHIFT 0x10
+/* [B] */
+#define KEY_B     0x42
+/* [R] */
+#define KEY_R     0x52
+/* [X] */
+#define KEY_X     0x58
+/* [Z] */
+#define KEY_Z     0x5A
+/* [A] */
+#define KEY_A     0x41
+/* [C] */
+#define KEY_C     0x43
+/* [V] */
+#define KEY_V     0x56
+/* [M] */
+#define KEY_M     0x4D
 
 forward OnPlayerLogged(playerid);
 public OnPlayerLogged(playerid)
@@ -21,7 +32,7 @@ public OnPlayerLogged(playerid)
     {
         PlayerVoiceData[playerid][ProximityMode] = PROXIMITY_MODE_NORMAL;
         SendClientMessage(playerid, -1, "Press B to talk to local chat.");
-        SvAddKey(playerid, 0x42);
+        SvAddKey(playerid, KEY_B);
     }
     return 1;
 }
@@ -67,7 +78,7 @@ public OnPlayerDisconnect(playerid, reason)
 
 public SV_VOID:OnPlayerActivationKeyPress(SV_UINT:playerid, SV_UINT:keyid) 
 {
-    if (keyid == 0x42)
+    if (keyid == KEY_B)
     {
         if (PlayerVoiceData[playerid][ProximityStream] != SV_NULL)
             SvAttachSpeakerToStream(PlayerVoiceData[playerid][ProximityStream], playerid);
@@ -79,13 +90,12 @@ public SV_VOID:OnPlayerActivationKeyPress(SV_UINT:playerid, SV_UINT:keyid)
             SetPlayerAttachedObject(playerid, 9, 19942, 6, 0.078999, 0.047999, 0.023999, 0.000000, 0.000000, 179.099899, 1.000000, 1.000000, 1.000000);
             SvAttachSpeakerToStream(RadioStream[PlayerVoiceData[playerid][RadioChannel]], playerid);
         }
-        
     }
 }
 
 public SV_VOID:OnPlayerActivationKeyRelease(SV_UINT:playerid, SV_UINT:keyid)
 {
-    if (keyid == 0x42)
+    if (keyid == KEY_B)
     {
         if (PlayerVoiceData[playerid][ProximityStream] != SV_NULL)
             SvDetachSpeakerFromStream(PlayerVoiceData[playerid][ProximityStream], playerid);
